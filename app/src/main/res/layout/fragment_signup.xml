@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fragments.SignupFragment">
+
+
+    <TextView
+        android:id="@+id/fbLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#3B5998"
+        android:drawableStart="@drawable/facebook_logo"
+        android:gravity="center"
+        android:text="Login using Facebook"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gmailLogin"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="372dp"
+        android:background="#E51C19"
+        android:drawableStart="@drawable/gmail_logo"
+        android:gravity="center"
+        android:paddingStart="18dp"
+        android:text="Login using Gmail"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fbLogin" />
+
+    <TextView
+        android:id="@+id/customLogin"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_margin="10dp"
+        android:background="@color/purple_700"
+        android:drawableStart="@drawable/ic_mail"
+        android:gravity="center"
+        android:paddingStart="25dp"
+        android:text="Custom Login"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gmailLogin"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
