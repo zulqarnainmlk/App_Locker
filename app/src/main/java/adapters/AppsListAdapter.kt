@@ -16,7 +16,7 @@ class AppsListAdapter(private var mList: ArrayList<AppInfo>) : RecyclerView.Adap
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.installed_app_list, parent, false)
+            .inflate(R.layout.app_list, parent, false)
 
         return ViewHolder(view)
     }

@@ -12,10 +12,14 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
 
 
     </fragment>
@@ -38,7 +42,9 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/signupFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
@@ -50,11 +56,138 @@
         tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_registrationFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_vaultFragment"
+            app:destination="@id/vaultFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_signupFragment"
+            app:destination="@id/signupFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_appsFragment"
+            app:destination="@id/appsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chart"
+            app:destination="@id/chart" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/vaultFragment"
+        android:name="fragments.VaultFragment"
+        android:label="fragment_vault"
+        tools:layout="@layout/fragment_vault" >
+        <action
+            android:id="@+id/action_vaultFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_vaultFragment_to_appsFragment"
+            app:destination="@id/appsFragment" />
+        <action
+            android:id="@+id/action_vaultFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_vaultFragment_to_pinGenerationFragment"
+            app:destination="@id/pinGenerationFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/appsFragment"
+        android:name="fragments.AppsFragment"
+        android:label="fragment_apps"
+        tools:layout="@layout/fragment_apps" >
+        <action
+            android:id="@+id/action_appsFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_appsFragment_to_vaultFragment"
+            app:destination="@id/vaultFragment" />
+        <action
+            android:id="@+id/action_appsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_vaultFragment"
+            app:destination="@id/vaultFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_appsFragment"
+            app:destination="@id/appsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_resetPinFragment"
+            app:destination="@id/resetPinFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_signupFragment"
+            app:destination="@id/signupFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/chart"
+        android:name="fragments.Chart"
+        android:label="fragment_chart2"
+        tools:layout="@layout/fragment_chart2" >
+        <action
+            android:id="@+id/action_chart_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pinGenerationFragment"
+        android:name="fragments.PinGenerationFragment"
+        android:label="fragment_pin_generation"
+        tools:layout="@layout/fragment_pin_generation" >
+        <action
+            android:id="@+id/action_pinGenerationFragment_to_vaultFragment"
+            app:destination="@id/vaultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPinFragment"
+        android:name="fragments.ResetPinFragment"
+        android:label="fragment_reset_pin"
+        tools:layout="@layout/fragment_reset_pin" >
+        <action
+            android:id="@+id/action_resetPinFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="fragments.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/my_nav"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>

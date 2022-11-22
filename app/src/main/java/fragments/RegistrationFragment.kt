@@ -2,6 +2,7 @@ package fragments
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -9,11 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.app_locker.R
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -27,17 +27,13 @@ import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_registration.*
 import java.lang.Exception
 import java.util.*
-import java.util.concurrent.Executor
 
 
-class RegistrationFragment : Fragment() {
-    lateinit var imageView: CircleImageView
-    var imagepath: String? = null
+class RegistrationFragment : Fragment(), View.OnClickListener {
+
     var SELECT_IMAGE_CODE = 1
     private var db_ref: DatabaseReference? = null
     private var db_User: FirebaseDatabase? = null
-    var firebaseStorage: FirebaseStorage? = null
-    var storageReference: StorageReference? = null
     var uri: Uri? = null
     private var mProfileUri: Uri? = null
     var mAuth: FirebaseAuth? = null
@@ -47,112 +43,83 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_registration, container, false)
 
-        return view
+        return inflater.inflate(R.layout.fragment_registration, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAuth = FirebaseAuth.getInstance()
-
-        onImageClick()
-        onRegistrationClick()
-       // imageView = view.findViewById(R.id.profile_image)
+        init()
     }
 
-    private fun onImageClick() {
-        profileCam_button_card.setOnClickListener {
-            Log.e("onClick","pressed")
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE)
-
-        }
+    private fun init() {
+        listeners()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            uri = data?.data
-            Log.e("onClick",uri.toString())
-            this.uploadimage(uri!!)
-
-///           Sharepref.setString( requireActivity(), Constants.CURRENT_USER_URI, uri.toString())
-
-            mProfileUri = uri
-            profileImg.setImageURI(uri)
-        }
+    private fun listeners() {
+        Cam_Icon.setOnClickListener(this)
+        button_register.setOnClickListener(this)
     }
 
-    private fun onRegistrationClick() {
-        button_register.setOnClickListener {
-//            val mountainsRef: StorageReference =
-//                storageReference!!.child("images/" + UUID.randomUUID().toString())
-//            mountainsRef.putFile(uri!!).addOnSuccessListener(OnSuccessListener<Any> {
-            val First_Name = first_name.text.toString()
-            val Last_Name = last_name.text.toString()
-            val Email = email.text.toString()
-            val Password = password.text.toString()
-            val Confirm_Password = confirm_password.text.toString()
-                if(First_Name.isEmpty() && Last_Name.isEmpty() && Email.isEmpty() && Password.isEmpty() && Confirm_Password.isEmpty())
-                {
-                    first_name.error="please fill this field with valid first name having length of greater than 2"
-                    last_name.error="please fill this field with valid last name having length of greater than 2"
-                    email.error="please fill this field with valid email"
-                    password.error="please fill this field with length of minimum 8"
-                    confirm_password.error="please fill this field with length of minimum 8"
-                }
-                else if(First_Name.length<=2)
-                {
-                    first_name.error="FirstName must be equal or greater than 3 characters"
-                }
-               else if(Last_Name.isEmpty() && Email.isEmpty() && Password.isEmpty() && Confirm_Password.isEmpty())
-                {
-                    last_name.error="please fill this field with valid last name having length of greater than 2"
-                    email.error="please fill this field with valid email"
-                    password.error="please fill this field with length of minimum 8"
-                    confirm_password.error="please fill this field with length of minimum 8"
-                }
-                else if(Last_Name.length<=2)
-                {
-                    last_name.error="LastName must be equal or greater than 3 characters"
-                }
-                else if(Email.isEmpty() && Password.isEmpty() && Confirm_Password.isEmpty())
-                {
-                    email.error="please fill this field with valid email"
-                    password.error="please fill this field with length of minimum 8"
-                    confirm_password.error="please fill this field with length of minimum 8"
-                }
-                else if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
-                {
-                    email.error="invalid email"
-                }
-                else if(Password.isEmpty() && Confirm_Password.isEmpty())
-                {
-                    password.error="please fill this field with length of minimum 8"
-                    confirm_password.error="please fill this field with length of minimum 8"
-                }
-                else if(Password.length<8)
-                {
-                    password.error="please fill this field with length of minimum 8"
-                }
-                else if(Confirm_Password.isEmpty())
-                {
-                    confirm_password.error="please fill this field with length of minimum 8"
-                }
-                else if(Password != Confirm_Password)
-                {
-                    confirm_password.error="please enter the same password as above"
-                }
-                else {
-                    mAuth!!.createUserWithEmailAndPassword(Email, Password)
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.Cam_Icon -> {
+                Log.e("onClick", "pressed")
+                val intent = Intent()
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_GET_CONTENT
+                startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE)
+            }
+            R.id.button_register -> {
+                val First_Name = first_name.text.toString()
+                val Last_Name = last_name.text.toString()
+                val Email = email.text.toString()
+                val Password = password.text.toString()
+                val Confirm_Password = confirm_password.text.toString()
+                if (First_Name.isEmpty() && Last_Name.isEmpty() && Email.isEmpty() && Password.isEmpty() && Confirm_Password.isEmpty()) {
+                    first_name.error =
+                        "please fill this field with valid first name having length of greater than 2"
+                    last_name.error =
+                        "please fill this field with valid last name having length of greater than 2"
+                    email.error = "please fill this field with valid email"
+                    password.error = "please fill this field with length of minimum 8"
+                    confirm_password.error = "please fill this field with length of minimum 8"
+                } else if (First_Name.length <= 2) {
+                    first_name.error = "FirstName must be equal or greater than 3 characters"
+                } else if (Last_Name.isEmpty() && Email.isEmpty() && Password.isEmpty() && Confirm_Password.isEmpty()) {
+                    last_name.error =
+                        "please fill this field with valid last name having length of greater than 2"
+                    email.error = "please fill this field with valid email"
+                    password.error = "please fill this field with length of minimum 8"
+                    confirm_password.error = "please fill this field with length of minimum 8"
+                } else if (Last_Name.length <= 2) {
+                    last_name.error = "LastName must be equal or greater than 3 characters"
+                } else if (Email.isEmpty() && Password.isEmpty() && Confirm_Password.isEmpty()) {
+                    email.error = "please fill this field with valid email"
+                    password.error = "please fill this field with length of minimum 8"
+                    confirm_password.error = "please fill this field with length of minimum 8"
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
+                    email.error = "invalid email"
+                } else if (Password.isEmpty() && Confirm_Password.isEmpty()) {
+                    password.error = "please fill this field with length of minimum 8"
+                    confirm_password.error = "please fill this field with length of minimum 8"
+                } else if (Password.length < 8) {
+                    password.error = "please fill this field with length of minimum 8"
+                } else if (Confirm_Password.isEmpty()) {
+                    confirm_password.error = "please fill this field with length of minimum 8"
+                } else if (Password != Confirm_Password) {
+                    confirm_password.error = "please enter the same password as above"
+                } else {
+                    Sharepref.setString(requireContext(),Constants.REGISTER_USER_EMAIL,Email)
+                    Sharepref.setString(requireContext(),Constants.REGISTER_USER_PASSWORD,Password)
+                    val encodedPassword = Base64.getEncoder().encodeToString(Password.toByteArray())
+                    mAuth = FirebaseAuth.getInstance()
+                    mAuth!!.createUserWithEmailAndPassword(Email, encodedPassword)
                         .addOnCompleteListener() { task: Task<AuthResult?> ->
                             if (!task.isSuccessful) {
                                 Toast.makeText(
-                                    requireActivity(),
+                                    requireContext(),
                                     "Registration failed! try agian.",
                                     Toast.LENGTH_LONG
                                 )
@@ -160,17 +127,22 @@ class RegistrationFragment : Fragment() {
                                 Log.v("error", task.exception!!.message!!)
 
                             } else {
-                                Toast.makeText(requireActivity(), "your account has been created!", Toast.LENGTH_LONG).show()
+
                                 db_User = FirebaseDatabase.getInstance()
                                 db_ref = db_User!!.getReference("CustomUsers")
                                 val id = mAuth!!.currentUser!!.uid
+                                Sharepref.setString(requireContext(),Constants.CURRENT_Register_USER_UID,id.toString())
                                 db_ref!!.child(id).child("firstname").setValue(First_Name)
                                 db_ref!!.child(id).child("lastname").setValue(Last_Name)
                                 db_ref!!.child(id).child("email").setValue(Email)
-                                db_ref!!.child(id).child("password").setValue(Password)
-                               val imageData=Sharepref.getString( requireActivity(), Constants.CURRENT_USER_URI,"")
-                                db_ref!!.child(id).child("photo").setValue(imageData)
+                                db_ref!!.child(id).child("password").setValue(encodedPassword)
+                                Log.e("tag6116",encodedPassword)
                                 Sharepref.setBoolean(requireActivity(), Constants.IS_REGISTER, true)
+                                Toast.makeText(
+                                    requireContext(),
+                                    "your account has been created!",
+                                    Toast.LENGTH_LONG
+                                ).show()
 
                                 findNavController().navigate(R.id.action_registrationFragment_to_homeFragment)
 
@@ -178,7 +150,7 @@ class RegistrationFragment : Fragment() {
                         }
                         .addOnFailureListener { e: Exception ->
                             Toast.makeText(
-                                requireActivity(),
+                                requireContext(),
                                 "invalid login credentials",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -186,11 +158,22 @@ class RegistrationFragment : Fragment() {
 
                         }
                 }
+            }
         }
-
     }
 
-    private fun uploadimage(path:Uri){
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            uri = data?.data
+            Log.e("onClick", uri.toString())
+            this.uploadImage(uri!!)
+            mProfileUri = uri
+            profileImg.setImageURI(uri)
+        }
+    }
+
+    private fun uploadImage(path: Uri) {
         val ref = FirebaseStorage.getInstance().getReference("UserImage/")
         val uploadTask = ref.putFile(path)
 
@@ -204,13 +187,19 @@ class RegistrationFragment : Fragment() {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result
-                Sharepref.setString( requireActivity(), Constants.CURRENT_USER_URI,  downloadUri.toString())
+                Sharepref.setString(
+                    requireContext(),
+                    Constants.CURRENT_USER_URI,
+                    downloadUri.toString()
+                )
             } else {
                 // Handle failures
                 // ...
             }
         }
     }
+
+
 }
 
 

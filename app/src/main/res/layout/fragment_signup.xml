@@ -1,65 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragments.SignupFragment">
 
-
-    <TextView
-        android:id="@+id/fbLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="#3B5998"
-        android:drawableStart="@drawable/facebook_logo"
-        android:gravity="center"
-        android:text="Login using Facebook"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/animations" />
 
     <TextView
         android:id="@+id/gmailLogin"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
         android:layout_margin="10dp"
-        android:layout_marginTop="372dp"
-        android:background="#E51C19"
-        android:drawableStart="@drawable/gmail_logo"
+        android:background="@drawable/signin_btn"
         android:gravity="center"
         android:paddingStart="18dp"
-        android:text="Login using Gmail"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintHorizontal_bias="0.842"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fbLogin" />
+        android:text="@string/login_using_gmail"
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/google"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/customLogin"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
         android:layout_margin="10dp"
-        android:background="@color/purple_700"
-        android:drawableStart="@drawable/ic_mail"
+        android:background="@drawable/signin_btn"
         android:gravity="center"
-        android:paddingStart="25dp"
-        android:text="Custom Login"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:paddingStart="15dp"
+        android:text="@string/custom_login"
+
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/mail2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/gmailLogin"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:ignore="RtlSymmetry" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/circular_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/welcome_to_app_locker"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/animationView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

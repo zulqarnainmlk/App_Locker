@@ -2,8 +2,7 @@ package helper
 
 import android.content.Context
 
-object Sharepref {
-    var sharedPrefKey="Notes"
+object Sharepref { var sharedPrefKey="Notes"
     @JvmStatic
     fun setBoolean(context: Context, key: String, value: Boolean) {
         val editor = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE).edit()
@@ -29,11 +28,16 @@ object Sharepref {
         val sharedPreference = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE)
         return sharedPreference.getString(key,defaultValue)
     }
-
+    @JvmStatic
     fun setInt(context: Context, key: String, value: Int) {
         val editor = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE).edit()
         editor.putInt(key, value)
         editor.apply()
+    }
+    @JvmStatic
+    fun getInt(context: Context, key: String, defaultValue: Int): Int {
+        val sharedPreference = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE)
+        return sharedPreference.getInt(key,defaultValue)
     }
     fun clearDB(context: Context)
     {

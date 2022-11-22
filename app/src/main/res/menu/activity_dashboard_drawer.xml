@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group  android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:title="DashBoard" />
+        <item
+            android:id="@+id/userComplaints"
+            android:title="Complaints" />
+        <item
+            android:id="@+id/user_Registration"
+            android:title="VIP Registration" />
+
+        <item
+            android:id="@+id/Station_Registration"
+            android:title="Station Registraion" />
+        <item
+            android:id="@+id/criminal_record"
+            android:title="CriminalRecord"
+    />
+
+        <item
+            android:id="@+id/logout"
+            android:title="Logout" />
+    </group>
+
+</menu>

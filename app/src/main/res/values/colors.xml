@@ -12,6 +12,19 @@
     <color name="light_pink">#32bc214b</color>
     <color name="light_pink_1">#B3bc214b</color>
     <color name="block_bg">#FEF5F5</color>
+    <color name="background">#D514192C</color>
 
+
+
+
+
+
+    <!--    Custom Color -->
+
+    <color name="color_white">#FFFDF5</color>
+    <color name="color_black">#FF000000</color>
+    <color name="color_green">#00FF00</color>
+    <color name="color_grey_light">#F8F8F8</color>
+    <color name="color_grey">#F5F5F5</color>
 
 </resources>

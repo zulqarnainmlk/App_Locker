@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:padding="3dp">
 
     <ImageView
@@ -22,8 +22,8 @@
         android:layout_marginStart="68dp"
         android:singleLine="true"
         android:layout_marginTop="4dp"
-        android:text="App Name"
-        android:textSize="16dp"
+        android:text="@string/install_app_name"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/app_icon"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
         android:layout_marginStart="68dp"
         android:singleLine="true"
         android:layout_marginTop="2dp"
-        android:text="App Package Name"
+        android:text="@string/app_package_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/app_icon"
         app:layout_constraintTop_toBottomOf="@+id/list_app_name"

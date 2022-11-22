@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/animationView"
         android:layout_centerHorizontal="true"
-        android:text="Welcome To AppLocker!"
+        android:text="@string/welcome_to_applocker"
         android:textColor="@color/colorPrimary"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -54,7 +54,7 @@
         android:layout_below="@+id/tv1"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:text="Keep Your Apps Safe!"
+        android:text="@string/keep_your_apps_safe"
         android:textColor="@color/colorPrimary"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:imeOptions="actionNext"
-            android:hint="Email">
+            android:hint="@string/email">
 
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:imeOptions="actionGo"
-            android:hint="Password"
+            android:hint="@string/password"
             android:maxLength="16">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -112,9 +112,8 @@
         android:id="@+id/check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
         android:layout_marginTop="10dp"
-        android:text="If you dont have account click on:"
+        android:text="@string/signup_desc"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/password" />
@@ -123,9 +122,8 @@
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
         android:layout_marginTop="10dp"
-        android:text="SignUp!"
+        android:text="@string/signup"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -141,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/signin_btn"
-        android:text="Login"
+        android:text="@string/login"
         android:textAllCaps="false"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/guideline2"
