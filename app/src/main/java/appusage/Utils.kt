@@ -1,15 +1,16 @@
 package appusage
 
-import androidx.annotation.RequiresApi
-import android.os.Build
 import android.app.usage.UsageEvents
 import android.app.usage.UsageStatsManager
 import android.content.Context
+import android.os.Build
 import android.util.Log
-import java.util.ArrayList
-import java.util.HashMap
+import androidx.annotation.RequiresApi
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 internal object Utils {
+
     @JvmField
     var DAY_IN_MILLIS = (86400 * 1000).toLong()
     var SEVEN_DAY_IN_MILLIS = (604800 * 1000).toLong()
@@ -27,7 +28,8 @@ internal object Utils {
         time = time % 3600
         hourMinSec[1] = time / 60
         hourMinSec[2] = time % 60
-      // Log.e("time:", "timetotalusage${hourMinSec}")
+
+
 
         return hourMinSec
     }
@@ -83,5 +85,10 @@ internal object Utils {
             }
         }
         return appUsageMap
+    }
+    fun roundOffDecimal(number: Double): Double? {
+        val df = DecimalFormat("#.##")
+        df.roundingMode = RoundingMode.FLOOR
+        return df.format(number).toDouble()
     }
 }

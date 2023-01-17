@@ -2,7 +2,6 @@ package fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,17 +15,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import helper.Constants
 import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_profile.*
-import java.util.*
 
 
 class ProfileFragment : Fragment(), View.OnClickListener {
     private lateinit var googleSignInClient: GoogleSignInClient
     var mAuth: FirebaseAuth? = null
+    private var db_ref: DatabaseReference? = null
+    private var db_User: FirebaseDatabase? = null
 
 
     override fun onCreateView(
@@ -50,12 +49,38 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     private fun checkUser() {
-        if (Sharepref.getBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)) {
+        if (Sharepref.getBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false))
+        {
+            val displayName=Sharepref.getString(requireContext(),Constants.DISPLAY_NAME,"")
+            user_name.text=displayName
             change_pass_card.visibility=View.GONE
         }
         else
-        {
-            change_pass_card.visibility=View.VISIBLE
+        {    val uid= Sharepref.getString(requireActivity(), Constants.CURRENT_USER_UID, "")
+            db_User = FirebaseDatabase.getInstance()
+            db_ref = db_User!!.getReference("CustomUsers").child(uid!!)
+            db_ref!!.addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val firstName = dataSnapshot.child("firstname").getValue(
+                        String::class.java
+                    )
+                    val lastName = dataSnapshot.child("lastname").getValue(
+                        String::class.java
+                    )
+                    val displayName= "$firstName $lastName"
+                    user_name.text= displayName
+
+                    Log.e("Testing: ", firstName!! + "\n" +lastName!!)
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+            })
+
+
+
 
         }
     }
@@ -69,6 +94,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         profile_tab.setOnClickListener(this)
         reset_card.setOnClickListener(this)
         change_pass_card.setOnClickListener(this)
+        set_Pin.setOnClickListener(this)
         button_logout.setOnClickListener(this)
     }
 
@@ -77,6 +103,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         when (v!!.id) {
             R.id.view_back -> {
                 findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+            }
+            R.id.set_Pin->{
+                findNavController().navigate(R.id.action_profileFragment_to_biometricFragment)
+
             }
 
             R.id.reset_card -> {

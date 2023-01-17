@@ -39,6 +39,16 @@ object Sharepref { var sharedPrefKey="Notes"
         val sharedPreference = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE)
         return sharedPreference.getInt(key,defaultValue)
     }
+    fun setFloat(context: Context, key: String, value: Float) {
+        val editor = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE).edit()
+        editor.putFloat(key, value)
+        editor.apply()
+    }
+    @JvmStatic
+    fun getFloat(context: Context, key: String, defaultValue: Float): Float {
+        val sharedPreference = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE)
+        return sharedPreference.getFloat(key,defaultValue)
+    }
     fun clearDB(context: Context)
     {
         val editor = context.getSharedPreferences(sharedPrefKey, Context.MODE_PRIVATE).edit()

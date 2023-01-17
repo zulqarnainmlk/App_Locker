@@ -48,7 +48,7 @@ class PinGenerationFragment : Fragment(), View.OnClickListener {
         when (v!!.id) {
             R.id.view_back ->
         {
-            findNavController().navigate(R.id.action_pinGenerationFragment_to_vaultFragment)
+            findNavController().navigate(R.id.action_pinGenerationFragment_to_biometricFragment)
         }
             R.id.setPin ->
             {
@@ -88,7 +88,7 @@ class PinGenerationFragment : Fragment(), View.OnClickListener {
                         .build()
 
                     dialog.show {  }
-                    findNavController().navigate(R.id.action_pinGenerationFragment_to_vaultFragment)
+                    findNavController().navigate(R.id.action_pinGenerationFragment_to_biometricFragment)
 
                 }
             }

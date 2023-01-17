@@ -12,8 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.example.app_locker.R
 import com.facebook.*
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -25,10 +23,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import helper.Constants
 import helper.Sharepref
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_signup.*
 import org.json.JSONObject
-import java.util.*
 
 
 class SignupFragment : Fragment(), View.OnClickListener {
@@ -125,6 +121,7 @@ class SignupFragment : Fragment(), View.OnClickListener {
 //                val fragment = HomeFragment()
 //                fragment.arguments = bundle
 //                fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)?.commit()
+                Sharepref.setString(requireContext(),Constants.DISPLAY_NAME,account.displayName.toString())
                 db_User = FirebaseDatabase.getInstance()
                 db_ref = db_User!!.getReference("GmailUsers")
                 db_ref!!.child(account.id!!).child("displayName").setValue(account.displayName)

@@ -26,5 +26,7 @@
     <color name="color_green">#00FF00</color>
     <color name="color_grey_light">#F8F8F8</color>
     <color name="color_grey">#F5F5F5</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="red">#F44336</color>
 
 </resources>

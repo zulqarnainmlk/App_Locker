@@ -25,15 +25,19 @@ import appusage.Utils.reverseProcessTime
 import com.example.app_locker.R
 import database.VaultDatabase
 import helper.Constants
+import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
 import listeners.DialogListener
 import models.AppVault
 
+import kotlin.collections.ArrayList
+
 
 class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
     private var packageName1: String? = null
     private var totalUsage: Int = 0
+
     private val DPM_ACTIVATION_REQUEST_CODE = 6135
     private val vaultDatabase by lazy { VaultDatabase.getDatabase(requireContext()).vaultDao() }
     private val TAG = "PermissionDemo"
@@ -54,6 +58,9 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
             init()
             progressBar.visibility=View.GONE
         }, Constants.DELAY_TIME.toLong())
+
+
+
     }
     @RequiresApi(Build.VERSION_CODES.M)
     private fun init() {
@@ -63,7 +70,14 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
             byDefaultDataShow()
         }
         startBackgroundService()
+//        weeklyData()
+//        monthlyData()
     }
+
+
+
+
+
     @RequiresApi(Build.VERSION_CODES.N)
     private fun byDefaultDataShow() {
         tab_today.setHintTextColor(resources.getColor(R.color.color_green))
@@ -142,7 +156,11 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
     }
     private fun startBackgroundService() {
         Alarms.scheduleNotification(requireContext())
+       // activity?.startService(Intent(activity, MyService::class.java))
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////recyclerview///////////////////////////////////////////////////////////////////////////
     @get:RequiresApi(api = Build.VERSION_CODES.N)
     private val todayUsageList: List<AppInfoModel>
         private get() {
@@ -150,6 +168,7 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
             val packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
             val todayUsageList: ArrayList<AppInfoModel> = ArrayList<AppInfoModel>()
             totalUsage = 0
+
             for (i in packageInfoList.indices) {
                 val packageInfo = packageInfoList[i]
                 if (packageManager.getLaunchIntentForPackage(packageInfo.packageName) != null) {
@@ -167,12 +186,11 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
                     }
                     Log.e("Tag14", "---------------------------------------")
                     Log.e("Tag14", "packageName $packageName")
+                    ///////////today
 
                     val timeSpent = todayTimeSpent(packageName)
-
                     Log.e("Tag16", "timetotalusage${timeSpent}")
                     totalUsageTime(timeSpent)
-
                     val timesAllowed = reverseProcessTime(timeSpent)
                     Log.e("Time1:", "timetotalusage${timesAllowed}")
 
@@ -196,11 +214,14 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
             Log.e("specificAppUsage", "totalUsage ${totalUsage}")
             timeShowInFormat(totalUsage)
             //total usage
-            Log.e("specificAppUsage", "totalUsage IN FORMAT ${timeShowInFormat(totalUsage)}")
+            Log.e("specificAppUsage",  timeShowInFormat(totalUsage))
+            Sharepref.setString(requireContext(),Constants.TODAY_TIME_MINUTES,totalMinutesToday(totalUsage).toString())
+            Sharepref.setString(requireContext(),Constants.TODAY_TOTAL_TIME,timeShowInFormat(totalUsage))
+            ///////////////////////////////////////////////////////////////////////////////
+            totalMinutesToday(totalUsage)
+            Log.e("timeInMinutes",  "todayMinutes:"+ totalMinutesToday(totalUsage).toString())
+///////////////////////////////////////////////////////////////////////////////////////////////
             total_time.text = timeShowInFormat(totalUsage)
-
-
-
             return todayUsageList
         }
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -211,6 +232,8 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
         calendar[Calendar.SECOND] = 0
         val beginTime = calendar.timeInMillis
         val endTime = beginTime + Utils.DAY_IN_MILLIS
+        Log.e("begintime:::::", beginTime.toString())
+        Log.e("endtime:::::",endTime.toString())
         val appUsageMap = Utils.getTimeSpent(requireContext(), packageName, beginTime, endTime)
         var usageTime = appUsageMap[packageName]
         //Log.e("Tag15","total time"+ usageTime.toString())
@@ -301,8 +324,23 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
         if (sec.toInt() in 0..9) {
             sec = "0$sec"
         }
+        //timeConvertor(hour,mint)
         return "${hour}h : ${mint}m "
         //": ${sec}s"
+
+    }
+    private fun totalMinutesToday(timeSpent: Int): Int {
+        val timesAllowed = reverseProcessTime(timeSpent)
+        Log.e("time:",timesAllowed.toString())
+
+        var hour = timesAllowed[0].toString()
+        var mint = timesAllowed[1].toString()
+        var sec = timesAllowed[2].toString()
+        var totalMinutes=hour.toInt()*60+mint.toInt()
+        //timeConvertor(hour,mint)
+        return totalMinutes
+        //": ${sec}s"
+
     }
     @get:RequiresApi(api = Build.VERSION_CODES.N)
     private val weeklyUsageList: List<AppInfoModel>
@@ -311,29 +349,31 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
             val packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
             val weeklyUsageList: ArrayList<AppInfoModel> = ArrayList<AppInfoModel>()
             totalUsage = 0
+
             for (i in packageInfoList.indices) {
                 val packageInfo = packageInfoList[i]
                 if (packageManager.getLaunchIntentForPackage(packageInfo.packageName) != null) {
                     val appName = packageInfo.applicationInfo.loadLabel(packageManager).toString()
                     val appIcon = packageInfo.applicationInfo.loadIcon(packageManager)
                     val packageName = packageInfo.packageName
-//                    val AppId = System.currentTimeMillis().toInt()
-//                    val data = AppVault(
-//                        AppId, appName, packageName
-//                    )
-//                    lifecycleScope.launch {
-//                        vaultDatabase.addAppData(data)
-//
-//                        // blockApp(position)
-//                    }
+
                     Log.e("Tag14", "---------------------------------------")
                     Log.e("Tag14", "packageName $packageName")
 
                     val timeSpent = weeklyTimeSpent(packageName)
+                    //val timeSpent1 = yesterdayTimeSpent(packageName)
+
 
                     Log.e("Tag16", "timetotalusage${timeSpent}")
                     totalUsageTime(timeSpent)
+                    ////////////////////////////////////////////////////////////////////////////////
+                   // totalUsageYesterDay(timeSpent1)
+                    timeShowInFormat(totalUsage)
+                    //totalMinutesYesterday(totalUsage1)
 
+
+                   // Log.e("totalUsageyesterday",  totalMinutesYesterday(totalUsage1).toString())
+                    /////////////////////////////////////////////////////////////////
                     val timesAllowed = reverseProcessTime(timeSpent)
                     Log.e("Time1:", "timetotalusage${timesAllowed}")
 
@@ -355,24 +395,25 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
         }
     @RequiresApi(api = Build.VERSION_CODES.N)
     private fun weeklyTimeSpent(packageName: String): Int {
-//        val calendar = Calendar.getInstance()
-//        calendar[Calendar.HOUR_OF_DAY] = 0
-//        calendar[Calendar.MINUTE] = 0
-//        calendar[Calendar.SECOND] = 0
-//        val beginTime =calendar.timeInMillis
-//        val endTime = beginTime + Utils.SEVEN_DAY_IN_MILLIS
+
         val beginCal = Calendar.getInstance()
+        //val weekCal = Calendar.getInstance()
         beginCal.add(Calendar.DATE, -7)
+        //weekCal.firstDayOfWeek = Calendar.SUNDAY
+        Log.e("week", beginCal.timeInMillis.toString())
+
         val endCal = Calendar.getInstance()
-
-
-
-        val appUsageMap = Utils.getTimeSpent(requireContext(), packageName, beginCal.timeInMillis, endCal.timeInMillis)
+        val appUsageMap = Utils.getTimeSpent(
+            requireContext(),
+            packageName,
+            beginCal.timeInMillis,
+            endCal.timeInMillis
+        )
+        Log.e("weekend", endCal.timeInMillis.toString())
         var usageTime = appUsageMap[packageName]
         //Log.e("Tag15","total time"+ usageTime.toString())
         if (usageTime == null) usageTime = 0
         return usageTime
-
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     private fun showWeeklyList() {
@@ -397,15 +438,6 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
                     val appName = packageInfo.applicationInfo.loadLabel(packageManager).toString()
                     val appIcon = packageInfo.applicationInfo.loadIcon(packageManager)
                     val packageName = packageInfo.packageName
-//                    val AppId = System.currentTimeMillis().toInt()
-//                    val data = AppVault(
-//                        AppId, appName, packageName
-//                    )
-//                    lifecycleScope.launch {
-//                        vaultDatabase.addAppData(data)
-//
-//                        // blockApp(position)
-//                    }
                     Log.e("Tag14", "---------------------------------------")
                     Log.e("Tag14", "packageName $packageName")
 
@@ -442,7 +474,7 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
 //        val beginTime =calendar.timeInMillis
 //        val endTime = beginTime + Utils.SEVEN_DAY_IN_MILLIS
         val beginCal = Calendar.getInstance()
-        beginCal.add(Calendar.DATE, -30)
+        beginCal.add(Calendar.DATE, -28)
         val endCal = Calendar.getInstance()
 
 
@@ -468,6 +500,7 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
         tab_today.setOnClickListener(this)
         tab_week.setOnClickListener(this)
         tab_month.setOnClickListener(this)
+        graph.setOnClickListener(this)
         home_tab.setOnClickListener(this)
         apps_tab.setOnClickListener(this)
         vault_tab.setOnClickListener(this)
@@ -524,6 +557,11 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
                     showMonthlyList()
 
                 }, Constants.DELAY_TIME.toLong())
+
+            }
+            R.id.graph -> {
+
+                findNavController().navigate(R.id.action_homeFragment_to_graphFragment)
 
             }
             R.id.home_tab -> {

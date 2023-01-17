@@ -1,8 +1,6 @@
 package fragments
 
-import android.annotation.SuppressLint
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +16,6 @@ import com.example.app_locker.R
 import com.google.firebase.auth.FirebaseAuth
 import helper.Constants
 import helper.Sharepref
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import java.lang.Exception
 import java.util.*

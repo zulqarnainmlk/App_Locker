@@ -3,6 +3,7 @@ package fragments
 import adapters.AppsAdapter
 import adapters.VaultAdapter
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -335,33 +337,49 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
         Log.e("block_view", "key :$key")
         when (key) {
             "block" -> {
-                if(Sharepref.getString(requireContext(),Constants.PIN_GENERATED ,"")!!.isEmpty()) {
+                if(Sharepref.getString(requireContext(),Constants.PIN_GENERATED ,"")!!.isEmpty()  && Sharepref.getString(requireContext(),Constants.SET_BIOMETRIC,"")!!.isEmpty()){
 
 
                     // in case pin code is empty
 
-                    apps[position].status = !apps[position].status
-                    displayAppsList[position].status = !displayAppsList[position].status
-                    Log.e("block_view", "name  :${apps[position].appName}")
-                    Log.e("block_view", "block status   :${apps[position].status}")
-                    val AppId = System.currentTimeMillis().toInt()
+//                    apps[position].status = !apps[position].status
+//                    displayAppsList[position].status = !displayAppsList[position].status
+//                    Log.e("block_view", "name  :${apps[position].appName}")
+//                    Log.e("block_view", "block status   :${apps[position].status}")
+//                    val AppId = System.currentTimeMillis().toInt()
+//
+//                    val data = DbVault(
+//                        AppId, displayAppsList[position].status, displayAppsList[position].appName,
+//                        displayAppsList[position].packageName, displayAppsList[position].icon.toString()
+//                    )
+//
+//
+//                    vaultAdapter.notifyDataSetChanged()
+//
+//
+//
+//                    lifecycleScope.launch {
+//                        vaultDatabase.addData(data)
+//
+//                    }
+//                    Toast.makeText(requireContext(),"Please Set PIN  or Biometric Authentication",Toast.LENGTH_SHORT).show()
 
-                    val data = DbVault(
-                        AppId, displayAppsList[position].status, displayAppsList[position].appName,
-                        displayAppsList[position].packageName, displayAppsList[position].icon.toString()
-                    )
 
+                    //
+                    val builder = AlertDialog.Builder(requireContext())
 
-                    vaultAdapter.notifyDataSetChanged()
-
-
-
-                    lifecycleScope.launch {
-                        vaultDatabase.addData(data)
-
+                    with(builder)
+                    {
+                        setTitle("Alert!!")
+                        setMessage("Please Set PIN  or Biometric Authentication in profile first!")
+                        setIcon(R.drawable.ic_lock)
+                        setPositiveButton("ok") { _,_ ->
+                            findNavController().navigate(R.id.action_vaultFragment_to_biometricFragment)
+//                            Toast.makeText(requireContext(),
+//                                android.R.string.yes, Toast.LENGTH_SHORT).show()
+                        }
+                        show()
                     }
-                    findNavController().navigate(R.id.action_vaultFragment_to_pinGenerationFragment)
-
                 }
                 else
                 {

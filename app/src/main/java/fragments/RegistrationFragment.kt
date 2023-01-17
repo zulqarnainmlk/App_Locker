@@ -20,8 +20,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import de.hdodenhof.circleimageview.CircleImageView
 import helper.Constants
 import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_registration.*
