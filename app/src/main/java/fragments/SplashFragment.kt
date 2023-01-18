@@ -40,7 +40,7 @@ class SplashFragment : Fragment() {
                 Log.e("LoginBy:", "CUSTOM_LOGIN")
 
             }, Constants.SPLASH_TIME.toLong())
-        } else if (Sharepref.getBoolean(requireActivity(), Constants.IS_REGISTER, false)) {
+        } else if (Sharepref.getBoolean(requireActivity(), Constants.IS_SIGNUP, false)) {
             Handler().postDelayed({
                 findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                 Log.e("LoginBy:", "REGISTRATION_LOGIN")
@@ -48,7 +48,7 @@ class SplashFragment : Fragment() {
             }, Constants.SPLASH_TIME.toLong())
         } else {
             Handler().postDelayed({
-                findNavController().navigate(R.id.action_splashFragment_to_signupFragment)
+                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 Log.e("LoginBy:", "SIGNUP")
 
             }, Constants.SPLASH_TIME.toLong())

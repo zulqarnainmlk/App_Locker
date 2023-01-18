@@ -105,6 +105,10 @@
     <string name="week2">week2</string>
     <string name="week4">week4</string>
     <string name="week3">week3</string>
+    <string name="email_error_1">please enter valid email</string>
+    <string name="password_error_1">please enter valid password</string>
+    <string name="email_error_2">please re enter your email</string>
+    <string name="password_error_2">length of password is minimum 8</string>
 
 
 </resources>

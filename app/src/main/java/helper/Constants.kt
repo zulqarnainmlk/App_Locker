@@ -1,7 +1,13 @@
 package helper
 
 object Constants {
-const val USER_EMAIL="user_email"
+    val IS_SIGNUP="is_signup"
+    val PASSWORD_LENGTH="password_length"
+    val PASSWORD_EMPTY="password_empty"
+    val EMAIL_PATTERN_ERROR="email_pattern_error"
+    val EMAIL_EMPTY="email_empty"
+    val EMAIL_PASSWORD_EMPTY="email_password_empty"
+    const val USER_EMAIL="user_email"
     const val IS_LOGIN="is_login"
     const val IS_REGISTER="is_register"
     const val IS_GMAIL_LOGIN="is_gmail_login"

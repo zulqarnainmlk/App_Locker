@@ -69,7 +69,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         String::class.java
                     )
                     val displayName= "$firstName $lastName"
-                    user_name.text= displayName
+                    user_name.text = displayName!!
 
                     Log.e("Testing: ", firstName!! + "\n" +lastName!!)
                 }
@@ -123,14 +123,14 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     .requestEmail()
                     .build()
                 googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-                googleSignInClient.signOut().addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        Log.e("signout", "gmail-signout")
-                    } else {
-                        Log.e("signout", "gmail-signout-failed")
-
-                    }
-                }
+//                googleSignInClient.signOut().addOnCompleteListener {
+//                    if (it.isSuccessful) {
+//                        Log.e("signout", "gmail-signout")
+//                    } else {
+//                        Log.e("signout", "gmail-signout-failed")
+//
+//                    }
+//                }
                 if (Sharepref.getBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)
 
                 ) {
@@ -139,7 +139,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                             Log.e("signout:", "gmail-signout")
                             Sharepref.setBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)
 
-                            findNavController().navigate(R.id.action_profileFragment_to_signupFragment)
+                            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
 
                         } else {
                             Log.e("signout", "gmail-signout-failed")
@@ -148,19 +148,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     }
 
                 } else {
-                    if (Sharepref.getBoolean(
-                            requireActivity(),
-                            Constants.IS_LOGIN,
-                            false
-                        ) || Sharepref.getBoolean(requireActivity(), Constants.IS_REGISTER, false)
-                    ) {
-                        FirebaseAuth.getInstance().signOut()
-                        Sharepref.setBoolean(requireActivity(), Constants.IS_LOGIN, false)
-                        Sharepref.setBoolean(requireActivity(), Constants.IS_REGISTER, false)
-                        findNavController().navigate(R.id.action_profileFragment_to_signupFragment)
-
-
-                    }
+                    FirebaseAuth.getInstance().signOut()
+                    Sharepref.setBoolean(requireActivity(), Constants.IS_LOGIN, false)
+                    Sharepref.setBoolean(requireActivity(), Constants.IS_SIGNUP, false)
+                    findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
                 }
             }
             R.id.home_tab -> {
