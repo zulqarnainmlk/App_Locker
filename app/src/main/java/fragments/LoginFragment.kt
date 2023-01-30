@@ -45,6 +45,7 @@ import kotlinx.android.synthetic.main.fragment_login.password
 import kotlinx.android.synthetic.main.fragment_login.signIn_button_login
 import kotlinx.android.synthetic.main.fragment_login.signup_button
 import kotlinx.android.synthetic.main.login.*
+import listeners.HomeListener
 import java.util.*
 
 
@@ -58,7 +59,21 @@ class LoginFragment : Fragment(), View.OnClickListener{
     private var callbackManager: CallbackManager? = null
     private var db_ref: DatabaseReference? = null
     private var db_User: FirebaseDatabase? = null
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = false,
+            backBtnVisibility = false,
+            newTitle = ""
 
+
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

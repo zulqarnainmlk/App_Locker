@@ -44,6 +44,7 @@ import kotlinx.android.synthetic.main.fragment_signup.google_constraint
 import kotlinx.android.synthetic.main.fragment_signup.password_invisible
 import kotlinx.android.synthetic.main.fragment_signup.password_visible
 import kotlinx.android.synthetic.main.fragment_signup.signup_button
+import listeners.HomeListener
 import org.json.JSONObject
 import java.lang.Exception
 import java.util.*
@@ -57,7 +58,21 @@ class SignupFragment : Fragment(), View.OnClickListener {
     private var db_ref: DatabaseReference? = null
     private var db_User: FirebaseDatabase? = null
     var mAuth: FirebaseAuth? = null
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = false,
+            backBtnVisibility = false,
+            newTitle = ""
 
+
+        )
+    }
 
 
     override fun onCreateView(

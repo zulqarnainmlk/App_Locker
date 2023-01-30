@@ -2,8 +2,10 @@ package fragments
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
@@ -29,6 +31,7 @@ import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
 import listeners.DialogListener
+import listeners.HomeListener
 import models.AppVault
 
 import kotlin.collections.ArrayList
@@ -46,13 +49,28 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
     companion object {
         const val LAUNCH_SETTINGS_ACTIVITY = 1
     }
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = true,
+            backBtnVisibility = false,
+            newTitle = getString(R.string.home_title)
+
+
+        )
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        title_home.text = getString(R.string.home_frag)
+        //title_home.text = getString(R.string.home_frag)
 
         Handler().postDelayed({
             init()
@@ -80,8 +98,8 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun byDefaultDataShow() {
-        tab_today.setHintTextColor(resources.getColor(R.color.color_green))
-        today_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+        today_shape_view.visibility=View.VISIBLE
+        today.setTextColor(Color.parseColor("#4530B2"))
         showTodayList()
 
     }
@@ -220,7 +238,7 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
             ///////////////////////////////////////////////////////////////////////////////
             totalMinutesToday(totalUsage)
             Log.e("timeInMinutes",  "todayMinutes:"+ totalMinutesToday(totalUsage).toString())
-///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////// time today in format/////////////////////////////////////////
             total_time.text = timeShowInFormat(totalUsage)
             return todayUsageList
         }
@@ -497,25 +515,31 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
         usage_recycler!!.adapter = appInfoListAdapter
     }
     private fun listeners() {
-        tab_today.setOnClickListener(this)
-        tab_week.setOnClickListener(this)
-        tab_month.setOnClickListener(this)
-        graph.setOnClickListener(this)
-        home_tab.setOnClickListener(this)
-        apps_tab.setOnClickListener(this)
-        vault_tab.setOnClickListener(this)
-        profile_tab.setOnClickListener(this)
+        today.setOnClickListener(this)
+        sevenDays.setOnClickListener(this)
+        month.setOnClickListener(this)
+        graph_icon.setOnClickListener(this)
+        //home_tab.setOnClickListener(this)
+        all_apps.setOnClickListener(this)
+        vault.setOnClickListener(this)
+        profile.setOnClickListener(this)
     }
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.tab_today -> {
-                tab_today.setHintTextColor(resources.getColor(R.color.color_green))
-                today_underline.setBackgroundColor(resources.getColor(R.color.color_green))
-                tab_week.setHintTextColor(resources.getColor(R.color.color_black))
-                week_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-                tab_month.setHintTextColor(resources.getColor(R.color.color_black))
-                month_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+            R.id.today -> {
+//                tab_today.setHintTextColor(resources.getColor(R.color.color_green))
+//                today_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+//                tab_week.setHintTextColor(resources.getColor(R.color.color_black))
+//                week_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+//                tab_month.setHintTextColor(resources.getColor(R.color.color_black))
+//                month_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+                today_shape_view.visibility=View.VISIBLE
+                today.setTextColor(Color.parseColor("#4530B2"))
+                seven_days_shape_view.visibility=View.GONE
+                sevenDays.setTextColor(Color.parseColor("#FFFFFFFF"))
+                month_shape_view.visibility=View.GONE
+                month.setTextColor(Color.parseColor("#FFFFFFFF"))
                 progressBar.visibility=View.VISIBLE
 
                 Handler().postDelayed({
@@ -526,13 +550,19 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
                 }, Constants.DELAY_TIME.toLong())
 
             }
-            R.id.tab_week -> {
-                tab_today.setHintTextColor(resources.getColor(R.color.color_black))
-                today_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-                tab_week.setHintTextColor(resources.getColor(R.color.color_green))
-                week_underline.setBackgroundColor(resources.getColor(R.color.color_green))
-                tab_month.setHintTextColor(resources.getColor(R.color.color_black))
-                month_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+            R.id.sevenDays -> {
+//                tab_today.setHintTextColor(resources.getColor(R.color.color_black))
+//                today_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+//                tab_week.setHintTextColor(resources.getColor(R.color.color_green))
+//                week_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+//                tab_month.setHintTextColor(resources.getColor(R.color.color_black))
+//                month_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+                today_shape_view.visibility=View.GONE
+                today.setTextColor(Color.parseColor("#FFFFFFFF"))
+                seven_days_shape_view.visibility=View.VISIBLE
+                sevenDays.setTextColor(Color.parseColor("#4530B2"))
+                month_shape_view.visibility=View.GONE
+                month.setTextColor(Color.parseColor("#FFFFFFFF"))
                 progressBar.visibility=View.VISIBLE
                 Handler().postDelayed({
 
@@ -542,13 +572,19 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
                 }, Constants.DELAY_TIME.toLong())
 
             }
-            R.id.tab_month -> {
-                tab_today.setHintTextColor(resources.getColor(R.color.color_black))
-                today_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-                tab_week.setHintTextColor(resources.getColor(R.color.color_black))
-                week_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-                tab_month.setHintTextColor(resources.getColor(R.color.color_green))
-                month_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+            R.id.month -> {
+//                tab_today.setHintTextColor(resources.getColor(R.color.color_black))
+//                today_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+//                tab_week.setHintTextColor(resources.getColor(R.color.color_black))
+//                week_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+//                tab_month.setHintTextColor(resources.getColor(R.color.color_green))
+//                month_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+                today_shape_view.visibility=View.GONE
+                today.setTextColor(Color.parseColor("#FFFFFFFF"))
+                seven_days_shape_view.visibility=View.GONE
+                sevenDays.setTextColor(Color.parseColor("#FFFFFFFF"))
+                month_shape_view.visibility=View.VISIBLE
+                month.setTextColor(Color.parseColor("#4530B2"))
                 progressBar.visibility=View.VISIBLE
 
                 Handler().postDelayed({
@@ -559,22 +595,22 @@ class HomeFragment : Fragment(), View.OnClickListener, DialogListener {
                 }, Constants.DELAY_TIME.toLong())
 
             }
-            R.id.graph -> {
+            R.id.graph_icon -> {
 
                 findNavController().navigate(R.id.action_homeFragment_to_graphFragment)
 
             }
-            R.id.home_tab -> {
-                Log.e("on_click", "home_card")
-                Toast.makeText(requireContext(), "Home", Toast.LENGTH_SHORT).show()
-            }
-            R.id.apps_tab -> {
+//            R.id.home_tab -> {
+//                Log.e("on_click", "home_card")
+//                Toast.makeText(requireContext(), "Home", Toast.LENGTH_SHORT).show()
+//            }
+            R.id.all_apps -> {
                 findNavController().navigate(R.id.action_homeFragment_to_appsFragment)
             }
-            R.id.vault_tab -> {
+            R.id.vault -> {
                 findNavController().navigate(R.id.action_homeFragment_to_vaultFragment)
             }
-            R.id.profile_tab -> {
+            R.id.profile -> {
                 findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
             }
         }

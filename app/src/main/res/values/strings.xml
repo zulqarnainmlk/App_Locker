@@ -109,6 +109,8 @@
     <string name="password_error_1">please enter valid password</string>
     <string name="email_error_2">please re enter your email</string>
     <string name="password_error_2">length of password is minimum 8</string>
+    <string name="home_title">Home</string>
+    <string name="apps_title">Apps</string>
 
 
 </resources>

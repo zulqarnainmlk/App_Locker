@@ -1,5 +1,6 @@
 package fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -12,9 +13,25 @@ import com.bumptech.glide.Glide.init
 import com.example.app_locker.R
 import helper.Constants
 import helper.Sharepref
+import listeners.HomeListener
 
 
 class SplashFragment : Fragment() {
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = false,
+            backBtnVisibility = false,
+            newTitle = ""
+
+
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

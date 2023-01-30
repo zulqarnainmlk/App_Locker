@@ -3,9 +3,11 @@ package fragments
 import adapters.AppsAdapter
 import adapters.VaultAdapter
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -25,15 +27,12 @@ import database.VaultDatabase
 import helper.Constants
 import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_vault.*
-import kotlinx.android.synthetic.main.fragment_vault.apps_tab
-import kotlinx.android.synthetic.main.fragment_vault.home_tab
-import kotlinx.android.synthetic.main.fragment_vault.profile_tab
+
 import kotlinx.android.synthetic.main.fragment_vault.progressBar
-import kotlinx.android.synthetic.main.fragment_vault.title
-import kotlinx.android.synthetic.main.fragment_vault.vault_tab
-import kotlinx.android.synthetic.main.fragment_vault.view_back
+
 import kotlinx.coroutines.launch
 import listeners.AdapterListener
+import listeners.HomeListener
 import models.AppList
 import models.DbVault
 
@@ -54,6 +53,20 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
     private val vaultAdapter by lazy { VaultAdapter(requireContext(), this, displayVaultList) }
     private val vaultDatabase by lazy { VaultDatabase.getDatabase(requireContext()).vaultDao() }
 
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = true,
+            backBtnVisibility = true,
+            newTitle = "Vault"
+
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +83,7 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
             progressBar.visibility=View.GONE
         }, Constants.DELAY_TIME.toLong())
 
-        title.text = getString(R.string.vault)
+//        title.text = getString(R.string.vault)
     }
 
     private fun init() {
@@ -106,20 +119,23 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
 
 
     private fun defaultView() {
-        tab_apps.setHintTextColor(resources.getColor(R.color.color_green))
-        apps_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+        all_apps_view.visibility= View.VISIBLE
+        all_apps.setTextColor(Color.parseColor("#4530B2"))
         searchApps.visibility = View.VISIBLE
         apps_recycler.visibility = View.VISIBLE
     }
 
     private fun listeners() {
-        tab_apps.setOnClickListener(this)
-        tab_vault.setOnClickListener(this)
-        view_back.setOnClickListener(this)
-        home_tab.setOnClickListener(this)
-        apps_tab.setOnClickListener(this)
-        vault_tab.setOnClickListener(this)
-        profile_tab.setOnClickListener(this)
+//        tab_apps.setOnClickListener(this)
+//        tab_vault.setOnClickListener(this)
+//        view_back.setOnClickListener(this)
+//        home_tab.setOnClickListener(this)
+//        apps_tab.setOnClickListener(this)
+//        vault_tab.setOnClickListener(this)
+//        profile_tab.setOnClickListener(this)
+        all_apps.setOnClickListener(this)
+        vault.setOnClickListener(this)
+//        switch2.setOnClickListener(this)
 
     }
     private fun filterApps(text: String) {
@@ -166,10 +182,10 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
 
 
     private fun openAllApps() {
-        tab_apps.setHintTextColor(resources.getColor(R.color.color_green))
-        apps_underline.setBackgroundColor(resources.getColor(R.color.color_green))
-        tab_vault.setHintTextColor(resources.getColor(R.color.color_black))
-        vault_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+        all_apps_view.visibility = View.VISIBLE
+        all_apps.setTextColor(Color.parseColor("#4530B2"))
+        vault_view.visibility = View.GONE
+        vault.setTextColor(Color.parseColor("#FFFFFFFF"))
         vault_recycler.visibility = View.GONE
         searchApps.visibility = View.VISIBLE
         apps_recycler.visibility = View.VISIBLE
@@ -179,10 +195,10 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
 
     private fun openVault() {
         getVault()
-        tab_apps.setHintTextColor(resources.getColor(R.color.color_black))
-        apps_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-        tab_vault.setHintTextColor(resources.getColor(R.color.color_green))
-        vault_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+        all_apps_view.visibility = View.GONE
+        all_apps.setTextColor(Color.parseColor("#FFFFFFFF"))
+        vault_view.visibility = View.VISIBLE
+        vault.setTextColor(Color.parseColor("#4530B2"))
         apps_recycler.visibility = View.GONE
         searchApps.visibility = View.VISIBLE
         vault_recycler.visibility = View.VISIBLE
@@ -301,32 +317,14 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.tab_apps -> {
+            R.id.all_apps -> {
                 openAllApps()
             }
-            R.id.tab_vault -> {
+            R.id.vault -> {
                 openVault()
 
             }
-            R.id.view_back -> {
-                findNavController().navigate(R.id.action_vaultFragment_to_homeFragment)
 
-            }
-            R.id.home_tab -> {
-                findNavController().navigate(R.id.action_vaultFragment_to_homeFragment)
-            }
-            R.id.apps_tab -> {
-                findNavController().navigate(R.id.action_vaultFragment_to_appsFragment)
-
-            }
-            R.id.vault_tab -> {
-                Toast.makeText(requireContext(), "vault", Toast.LENGTH_SHORT).show()
-
-            }
-            R.id.profile_tab -> {
-                findNavController().navigate(R.id.action_vaultFragment_to_profileFragment)
-
-            }
 
         }
     }

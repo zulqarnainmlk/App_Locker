@@ -1,6 +1,7 @@
 package fragments
 
 import adapters.AppsListAdapter
+import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.os.Bundle
@@ -18,22 +19,34 @@ import com.example.app_locker.R
 import database.VaultDatabase
 import helper.Constants
 import kotlinx.android.synthetic.main.fragment_apps.*
-import kotlinx.android.synthetic.main.fragment_apps.apps_tab
-import kotlinx.android.synthetic.main.fragment_apps.home_tab
-import kotlinx.android.synthetic.main.fragment_apps.profile_tab
+
 import kotlinx.android.synthetic.main.fragment_apps.progressBar
-import kotlinx.android.synthetic.main.fragment_apps.vault_tab
-import kotlinx.android.synthetic.main.fragment_home.*
+import listeners.HomeListener
+
 import models.AppInfo
 import java.util.*
 
 
-class AppsFragment : Fragment(),View.OnClickListener  {
+class AppsFragment : Fragment()  {
     private var installedAppAdapter: AppsListAdapter? = null
     private val vaultDatabase by lazy { VaultDatabase.getDatabase(requireContext()).vaultDao() }
     private val apps  = ArrayList<AppInfo>()
 
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = true,
+            backBtnVisibility = true,
+            newTitle = getString(R.string.apps_title)
 
+
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +61,7 @@ class AppsFragment : Fragment(),View.OnClickListener  {
             init()
             progressBar.visibility=View.GONE
         }, Constants.DELAY_TIME.toLong())
-        title.text = "Apps"
+        //title.text = "Apps"
     }
     private fun init() {
         listeners()
@@ -66,7 +79,7 @@ class AppsFragment : Fragment(),View.OnClickListener  {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                filter(s.toString());
+                filter(s.toString())
 
             }
 
@@ -74,37 +87,9 @@ class AppsFragment : Fragment(),View.OnClickListener  {
 
     private fun listeners() {
 //        searchField.setOnClickListener(this)
-        view_back.setOnClickListener(this)
-        home_tab.setOnClickListener(this)
-        apps_tab.setOnClickListener(this)
-        vault_tab.setOnClickListener(this)
-        profile_tab.setOnClickListener(this)
+
     }
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.view_back -> {
-                findNavController().navigate(R.id.action_appsFragment_to_homeFragment)
 
-            }
-            R.id.home_tab -> {
-                findNavController().navigate(R.id.action_appsFragment_to_homeFragment)
-
-            }
-            R.id.apps_tab -> {
-                Toast.makeText(requireContext(), "Apps", Toast.LENGTH_SHORT).show()
-
-            }
-            R.id.vault_tab -> {
-                findNavController().navigate(R.id.action_appsFragment_to_vaultFragment)
-
-            }
-            R.id.profile_tab -> {
-                findNavController().navigate(R.id.action_appsFragment_to_profileFragment)
-
-            }
-
-        }
-    }
     private fun filter(text: String) {
 
         val filteredList: ArrayList<AppInfo> = ArrayList()

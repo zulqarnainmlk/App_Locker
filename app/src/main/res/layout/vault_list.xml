@@ -4,16 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="3dp">
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_5sdp">
 
-    <ImageView
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="@dimen/_20sdp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/app_name"
         android:layout_width="200dp"
@@ -29,14 +48,16 @@
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchButton"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_centerInParent="true"
-        android:layout_marginTop="8dp"
+        android:thumb="@drawable/thumb1"
         android:checked="false"
+        app:trackTint="@color/white_shade_2"
         android:paddingStart="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry,UseSwitchCompatOrMaterialXml" />
@@ -68,10 +89,12 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
         android:text="Blocked"
-        app:layout_constraintBottom_toTopOf="@+id/package_name"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/switchButton"
-        app:layout_constraintStart_toEndOf="@+id/app_name" />
+        app:layout_constraintStart_toEndOf="@+id/app_name"
+        app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,19 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/usage_list"
-    android:layout_height="70dp"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        app:cardCornerRadius="14dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
+        app:cardCornerRadius="@dimen/_20sdp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,25 +25,44 @@
 
             >
 
-            <ImageView
+            <!--            <ImageView-->
+            <!--                android:id="@+id/list_app_icon"-->
+            <!--                android:layout_width="32dp"-->
+            <!--                android:layout_height="32dp"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintVertical_bias="0.555" />-->
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/list_app_icon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.555" />
 
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@color/gray_shade_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/list_app_name"
+                app:layout_constraintStart_toEndOf="@+id/list_app_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/list_app_name"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="18dp"
                 android:layout_marginStart="20dp"
                 android:text="App Name"
-                android:textSize="14sp"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline1"
                 app:layout_constraintStart_toEndOf="@+id/list_app_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,90 +73,196 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.68" />
 
-            <TextView
-                android:id="@+id/hour"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/total_time_card"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:text="00"
-                android:textSize="12sp"
+                android:layout_height="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/white_shade_2"
+                app:layout_constraintStart_toEndOf="@+id/guideline1"
+                app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    >
+                    <TextView
+                        android:id="@+id/hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="00"
+                        android:textColor="@color/gray_shade_1"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+                    <TextView
 
-                android:id="@+id/text_hr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="5dp"
-                android:text="hr"
+                        android:id="@+id/text_hr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="5dp"
+                        android:text="hr"
+                        android:textColor="@color/gray_shade_1"
 
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toEndOf="@+id/hour"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/minute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00"
-                android:layout_marginStart="3dp"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/text_hr"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-
-                android:id="@+id/text_min"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="5dp"
-                android:text="min"
-
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:layout_constraintStart_toEndOf="@+id/minute"
-                app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/hour"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/second"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="27dp"
-                android:text="00"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/minute"
-                app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="00"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray_shade_1"
 
-            <TextView
-                android:id="@+id/text_sec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:text="sec"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/second"
-                app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/text_hr"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+
+                        android:id="@+id/text_min"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="5dp"
+                        android:text="min"
+                        android:textColor="@color/gray_shade_1"
+
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/minute"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
+                    <TextView
+                        android:id="@+id/second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="27dp"
+                        android:text="00"
+                        android:textSize="12sp"
+                        android:textColor="@color/gray_shade_1"
 
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/minute"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_sec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:text="sec"
+                        android:textColor="@color/gray_shade_1"
+
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/second"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+<!--            <TextView-->
+<!--                android:id="@+id/hour"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="3dp"-->
+<!--                android:text="00"-->
+<!--                android:textColor="@color/gray_shade_1"-->
+<!--                android:textSize="12sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/guideline1"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <TextView-->
+
+<!--                android:id="@+id/text_hr"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="3dp"-->
+<!--                android:layout_marginEnd="5dp"-->
+<!--                android:text="hr"-->
+<!--                android:textColor="@color/gray_shade_1"-->
+
+<!--                android:textSize="12sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/guideline2"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/hour"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/minute"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="3dp"-->
+<!--                android:text="00"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@color/gray_shade_1"-->
+
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/text_hr"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <TextView-->
+
+<!--                android:id="@+id/text_min"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="3dp"-->
+<!--                android:layout_marginEnd="5dp"-->
+<!--                android:text="min"-->
+<!--                android:textColor="@color/gray_shade_1"-->
+
+<!--                android:textSize="12sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/guideline3"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/minute"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/second"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="27dp"-->
+<!--                android:text="00"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@color/gray_shade_1"-->
+
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/minute"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/text_sec"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="3dp"-->
+<!--                android:text="sec"-->
+<!--                android:textColor="@color/gray_shade_1"-->
+
+<!--                android:textSize="12sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/second"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

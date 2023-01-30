@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_locker.R
@@ -48,9 +49,13 @@ class AppsAdapter(
             if (holder.switch.isChecked) {
                 holder.switch.isChecked = false
                 adapterListener.adapterData("unblock", position)
+                holder.switch.setThumbResource(R.drawable.thumb1)
+
             } else {
                 holder.switch.isChecked = true
                 adapterListener.adapterData("block", position)
+                holder.switch.setThumbResource(R.drawable.thumb)
+
             }
         }
 

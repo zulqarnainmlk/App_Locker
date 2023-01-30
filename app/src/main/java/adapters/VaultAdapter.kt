@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_locker.R
@@ -47,12 +48,14 @@ class VaultAdapter(
         holder.name.text = AppInfo.name
         holder.package_name.text = AppInfo.pkgInfo
         holder.switch.isChecked= true
+        holder.switch.setThumbResource(R.drawable.thumb)
 
 
         holder.itemView.toggle_click.setOnClickListener {
 
             if( holder.switch.isChecked){
                 adapterListener.adapterVault("unblock", position)
+                holder.switch.setThumbResource(R.drawable.thumb1)
             }
 
         }

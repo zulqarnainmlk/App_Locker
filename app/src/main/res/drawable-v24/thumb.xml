@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/red"/>
+            <size android:height="20dp" android:width="20dp"/>
+        </shape>
+
+
+    </item>
+    <item android:drawable="@drawable/lock_icon"
+        android:bottom="10dp"
+        android:left="10dp"
+        android:right="10dp"
+        android:top="10dp"/>
+
+
+</layer-list>
