@@ -162,9 +162,11 @@ class SignupFragment : Fragment(), View.OnClickListener {
                 if(password_visible.isVisible)
                 {
                     password_visible.visibility=View.GONE
-                    password_invisible.visibility=View.VISIBLE
                     password_signup.transformationMethod =
-                        PasswordTransformationMethod.getInstance()
+                        HideReturnsTransformationMethod.getInstance()
+                    password_invisible.visibility=View.VISIBLE
+
+
                 }
             }
             R.id.password_invisible ->
@@ -172,20 +174,24 @@ class SignupFragment : Fragment(), View.OnClickListener {
                 if(password_invisible.isVisible)
                 {
                     password_invisible.visibility=View.GONE
-                    password_visible.visibility=View.VISIBLE
+
                     password_signup.transformationMethod =
-                        HideReturnsTransformationMethod.getInstance()
+                        PasswordTransformationMethod.getInstance()
+                    password_visible.visibility=View.VISIBLE
+
                 }
             }
             R.id.cn_password_visible ->
             {
-                cn_password_signup
+
                 if(cn_password_visible.isVisible)
                 {
                     cn_password_visible.visibility=View.GONE
-                    cn_password_invisible.visibility=View.VISIBLE
                     cn_password_signup.transformationMethod =
-                        PasswordTransformationMethod.getInstance()
+                        HideReturnsTransformationMethod.getInstance()
+                    cn_password_invisible.visibility=View.VISIBLE
+
+
                 }
             }
             R.id.cn_password_invisible ->
@@ -193,9 +199,11 @@ class SignupFragment : Fragment(), View.OnClickListener {
                 if(cn_password_invisible.isVisible)
                 {
                     cn_password_invisible.visibility=View.GONE
-                    cn_password_visible.visibility=View.VISIBLE
                     cn_password_signup.transformationMethod =
-                        HideReturnsTransformationMethod.getInstance()
+                        PasswordTransformationMethod.getInstance()
+                    cn_password_visible.visibility=View.VISIBLE
+
+
                 }
             }
             R.id.signup_button -> {

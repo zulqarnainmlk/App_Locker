@@ -3,149 +3,398 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_shade_2"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragments.UpdateFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:id="@+id/constraint_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/top_guideline">
 
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <View
-            android:id="@+id/view_back"
-            android:layout_width="90dp"
-            android:layout_height="60dp"
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:src="@drawable/ovalshape"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_back"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/person_icon"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/circular_bold"
 
-            android:text="@string/title"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
 
+        android:text="name"
+        android:textColor="@color/purple"
+        android:fontFamily="@font/sf_ui_display_heading"
+        android:textSize="@dimen/_20sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_profile"/>
 
-        <RelativeLayout
-            android:id="@+id/profile_ll"
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Enter your current Password First To"
+        android:maxLines="1"
+        android:fontFamily="@font/sf_ui_display_text"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Update Password"
+        android:fontFamily="@font/sf_ui_display_text"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/current_pass_card"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/mid_guideline"
+        app:strokeColor="@color/purple"
+        app:strokeWidth="@dimen/_1sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <FrameLayout
-                android:layout_width="110.00dp"
-                android:layout_height="110.00dp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:elevation="5.00dp">
+            <ImageView
+                android:id="@+id/lock_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/chnage_pas_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.555" />
 
-                <ImageView
-                    android:id="@+id/profileImg"
-                    android:layout_width="110.00dp"
-                    android:layout_height="110.00dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/famicare_logo"
-                    app:civ_border_color="@color/block_bg"
-                    app:civ_border_width="1dp" />
-            </FrameLayout>
-        </RelativeLayout>
+            <View
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:background="@color/hint_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/current_pass"
+                app:layout_constraintStart_toEndOf="@+id/lock_icon"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/current_password"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/profile_ll">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/current_pass"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/current_password"
+                android:layout_marginStart="20dp"
+                android:background="@null"
+                android:fontFamily="@font/sf_ui_display_text"
+                android:hint="Current Password"
+                android:inputType="textPassword"
+                android:enabled="true"
+
+                android:maxLength="15"
+                android:imeOptions="actionNext"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lock_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/visible_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/current_pas_eye_visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_end"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/invisible_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/current_pass_eye_invisible"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_end"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+    <TextView
+        android:id="@+id/current_pass_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="vdfvksvkjfbksbjkbkjbkjbkjvbzkjbvjkb"
+        android:fontFamily="@font/sf_ui_display_text"
+        android:textColor="@color/red"
+        android:layout_marginStart="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/current_pass_card" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/new_pass_card"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_17sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/current_pass_card"
+        app:strokeColor="@color/purple"
+        app:strokeWidth="@dimen/_1sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/lock_icon_1"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/chnage_pas_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.555" />
+
+            <View
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:background="@color/hint_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/new_pass"
+                app:layout_constraintStart_toEndOf="@+id/lock_icon_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <EditText
+                android:id="@+id/new_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@null"
+                android:fontFamily="@font/sf_ui_display_text"
+                android:hint="New Password"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
-                android:singleLine="true">
+                android:enabled="true"
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:maxLength="15"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lock_icon_1"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/update"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/current_password">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/update_password"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/hide_pass"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/update_password"
+                android:src="@drawable/current_pas_eye_visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_end_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/show_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/current_pass_eye_invisible"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_end_1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_end_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+    <TextView
+        android:id="@+id/new_pass_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sjkdbvfksvidvsuaiviu"
+        android:visibility="gone"
+        android:fontFamily="@font/sf_ui_display_text"
+        android:textColor="@color/red"
+        android:layout_marginStart="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/new_pass_card" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/con_pass_card"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_17sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/new_pass_card"
+        app:strokeColor="@color/purple"
+        app:strokeWidth="@dimen/_1sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/lock_icon_2"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/chnage_pas_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.555" />
+
+            <View
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:background="@color/hint_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/con_pass"
+                app:layout_constraintStart_toEndOf="@+id/lock_icon_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <EditText
+                android:id="@+id/con_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@null"
+                android:fontFamily="@font/sf_ui_display_text"
+                android:hint="Confirm Password"
                 android:imeOptions="actionGo"
+                android:enabled="true"
+
                 android:inputType="textPassword"
-                android:singleLine="true">
+                android:maxLength="15"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lock_icon_2"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/hide_pass_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/current_pas_eye_visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_end_2"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button_update"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
-            android:background="@drawable/signin_btn"
-            android:text="@string/update"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/update" />
+            <ImageView
+                android:id="@+id/show_pass_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/current_pass_eye_invisible"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_end_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_end_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+    <TextView
+        android:id="@+id/con_pass_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="error........................."
+        android:fontFamily="@font/sf_ui_display_text"
+        android:textColor="@color/red"
+        android:visibility="gone"
+
+        android:layout_marginStart="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/con_pass_card" />
+
+    <Button
+        android:id="@+id/button_update"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_add_new_parent_bg"
+        android:text="@string/update"
+        android:textSize="@dimen/_12sdp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/sf_ui_display_heading"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/con_pass_card" />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
             android:layout_width="wrap_content"
@@ -159,6 +408,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+    <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/mid_guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.45" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>

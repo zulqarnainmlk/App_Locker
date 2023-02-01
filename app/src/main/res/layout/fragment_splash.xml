@@ -4,9 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/backgrond"
+    android:background="@color/purple"
     tools:context="fragments.SplashFragment">
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/top_horizontal_guideline_1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       app:layout_constraintGuide_percent="0.12" />
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/bottom_horizontal_guideline"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       app:layout_constraintGuide_percent="0.7" />
 
+   <ImageView
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       android:src="@drawable/backgrond"
+       android:scaleType="fitXY"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/top_horizontal_guideline_1"
+       app:layout_constraintBottom_toTopOf="@+id/bottom_horizontal_guideline"/>
    <ImageView
        android:layout_width="@dimen/_200sdp"
        android:layout_height="@dimen/_200sdp"

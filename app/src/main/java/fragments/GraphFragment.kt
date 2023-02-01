@@ -1,5 +1,6 @@
 package fragments
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
@@ -24,7 +25,16 @@ import com.github.mikephil.charting.utils.Utils
 import helper.Constants
 import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_graph.*
+import kotlinx.android.synthetic.main.fragment_graph.month
+import kotlinx.android.synthetic.main.fragment_graph.month_shape_view
+import kotlinx.android.synthetic.main.fragment_graph.progressBar
+import kotlinx.android.synthetic.main.fragment_graph.sevenDays
+import kotlinx.android.synthetic.main.fragment_graph.seven_days_shape_view
+import kotlinx.android.synthetic.main.fragment_graph.today
+import kotlinx.android.synthetic.main.fragment_graph.today_shape_view
 import kotlinx.android.synthetic.main.fragment_graph.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
+import listeners.HomeListener
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.log
@@ -32,7 +42,21 @@ import kotlin.math.log
 
 class GraphFragment : Fragment(),View.OnClickListener {
 
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = true,
+            backBtnVisibility = true,
+            newTitle = "Statistics"
 
+
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +69,6 @@ class GraphFragment : Fragment(),View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        title.text = getString(R.string.statistics)
     }
     @RequiresApi(Build.VERSION_CODES.N)
     private fun init() {
@@ -56,8 +79,8 @@ class GraphFragment : Fragment(),View.OnClickListener {
     }
     @RequiresApi(Build.VERSION_CODES.N)
     private fun byDefaultGraph() {
-        tab_today.setHintTextColor(resources.getColor(R.color.color_green))
-        today_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+        today_shape_view.visibility=View.VISIBLE
+        today.setTextColor(Color.parseColor("#4530B2"))
         todayGraphView()
         progressBar.visibility=View.GONE
     }
@@ -120,22 +143,40 @@ class GraphFragment : Fragment(),View.OnClickListener {
         val dataSet = PieDataSet(entries, "Mobile OS")
         /////set values to textView
         appusage.Utils.roundOffDecimal(today_percent.toDouble())
-        val circleText1= "Today"+"\n"+appusage.Utils.roundOffDecimal(today_percent.toDouble())+"%"
-        circle1Text.text=circleText1
+        val circleText1= appusage.Utils.roundOffDecimal(today_percent.toDouble())
+        circle1Text.text= buildString {
+        append(circleText1.toString())
+        append("%")
+    }
         val remaining=100-today_percent
         appusage.Utils.roundOffDecimal(remaining.toDouble())
-        val circleText2= "Remain"+"\n"+ appusage.Utils.roundOffDecimal(remaining.toDouble())+"%"
-        circle2Text.text=circleText2
-        customCircle3.visibility=View.GONE
-        circle3Text.visibility=View.GONE
-        customCircle4.visibility=View.GONE
-        circle4Text.visibility=View.GONE
-        customCircle5.visibility=View.GONE
-        circle5Text.visibility=View.GONE
-        customCircle6.visibility=View.GONE
-        circle6Text.visibility=View.GONE
-        customCircle7.visibility=View.GONE
-        circle7Text.visibility=View.GONE
+        val circleText2= appusage.Utils.roundOffDecimal(remaining.toDouble())
+        circle2Text.text= buildString {
+        append(circleText2.toString())
+        append("%")
+        //        customCircle3.visibility=View.GONE
+//        circle3Text.visibility=View.GONE
+//        customCircle4.visibility=View.GONE
+//        circle4Text.visibility=View.GONE
+//        customCircle5.visibility=View.GONE
+//        circle5Text.visibility=View.GONE
+//        customCircle6.visibility=View.GONE
+//        circle6Text.visibility=View.GONE
+//        customCircle7.visibility=View.GONE
+//        circle7Text.visibility=View.GONE
+
+        // on below line we are setting icons.
+    }
+//        customCircle3.visibility=View.GONE
+//        circle3Text.visibility=View.GONE
+//        customCircle4.visibility=View.GONE
+//        circle4Text.visibility=View.GONE
+//        customCircle5.visibility=View.GONE
+//        circle5Text.visibility=View.GONE
+//        customCircle6.visibility=View.GONE
+//        circle6Text.visibility=View.GONE
+//        customCircle7.visibility=View.GONE
+//        circle7Text.visibility=View.GONE
 
         // on below line we are setting icons.
             dataSet.setDrawIcons(false).toString()
@@ -147,8 +188,8 @@ class GraphFragment : Fragment(),View.OnClickListener {
 
         // add a lot of colors to list
         val colors: ArrayList<Int> = ArrayList()
-        colors.add(resources.getColor(R.color.purple_200))
-        colors.add(resources.getColor(R.color.yellow))
+        colors.add(resources.getColor(R.color.purple))
+        colors.add(resources.getColor(R.color.teal_200))
         colors.add(resources.getColor(R.color.red))
 
         // on below line we are setting colors.
@@ -271,28 +312,28 @@ class GraphFragment : Fragment(),View.OnClickListener {
         appusage.Utils.roundOffDecimal(remaining.toDouble())
         val circleText2= getCalculatedDate("", "dd-MM-yyyy", -2)+"\n"+ appusage.Utils.roundOffDecimal(two_days_ago_percent.toDouble())+"%"
         circle2Text.text=circleText2
-        customCircle3.visibility=View.VISIBLE
-        circle3Text.visibility=View.VISIBLE
+//        customCircle3.visibility=View.VISIBLE
+//        circle3Text.visibility=View.VISIBLE
         val circleText3=getCalculatedDate("", "dd-MM-yyyy", -3)+"\n"+ appusage.Utils.roundOffDecimal(three_days_ago_percent.toDouble())+"%"
-        circle3Text.text=circleText3
-        customCircle4.visibility=View.VISIBLE
-        circle4Text.visibility=View.VISIBLE
+//        circle3Text.text=circleText3
+//        customCircle4.visibility=View.VISIBLE
+//        circle4Text.visibility=View.VISIBLE
         val circleText4=getCalculatedDate("", "dd-MM-yyyy", -4)+"\n"+ appusage.Utils.roundOffDecimal(four_days_ago_percent.toDouble())+"%"
-        circle4Text.text=circleText4
-        customCircle5.visibility=View.VISIBLE
-        circle5Text.visibility=View.VISIBLE
+//        circle4Text.text=circleText4
+//        customCircle5.visibility=View.VISIBLE
+//        circle5Text.visibility=View.VISIBLE
         val circleText5=getCalculatedDate("", "dd-MM-yyyy", -5)+"\n"+ appusage.Utils.roundOffDecimal(five_days_ago_percent.toDouble())+"%"
-        circle5Text.text=circleText5
-
-        customCircle6.visibility=View.VISIBLE
-        circle6Text.visibility=View.VISIBLE
+//        circle5Text.text=circleText5
+//
+//        customCircle6.visibility=View.VISIBLE
+//        circle6Text.visibility=View.VISIBLE
         val circleText6=getCalculatedDate("", "dd-MM-yyyy", -6)+"\n"+ appusage.Utils.roundOffDecimal(six_days_ago_percent.toDouble())+"%"
-        circle6Text.text=circleText6
-
-        customCircle7.visibility=View.VISIBLE
-        circle7Text.visibility=View.VISIBLE
+//        circle6Text.text=circleText6
+//
+//        customCircle7.visibility=View.VISIBLE
+//        circle7Text.visibility=View.VISIBLE
         val circleText7=getCalculatedDate("", "dd-MM-yyyy", -7)+"\n"+ appusage.Utils.roundOffDecimal(seven_days_ago_percent.toDouble())+"%"
-        circle7Text.text=circleText7
+//        circle7Text.text=circleText7
 
 
 
@@ -307,13 +348,13 @@ class GraphFragment : Fragment(),View.OnClickListener {
         dataSet.selectionShift = 5f
         // add a lot of colors to list
         val colors: ArrayList<Int> = ArrayList()
-        colors.add(resources.getColor(R.color.purple_200))
-        colors.add(resources.getColor(R.color.yellow))
-        colors.add(resources.getColor(R.color.red))
+        colors.add(resources.getColor(R.color.purple))
         colors.add(resources.getColor(R.color.teal_200))
+        colors.add(resources.getColor(R.color.orange))
+        colors.add(resources.getColor(R.color.green_Shade_1))
+        colors.add(resources.getColor(R.color.red))
+        colors.add(resources.getColor(R.color.purple_200))
         colors.add(resources.getColor(R.color.teal_700))
-        colors.add(resources.getColor(R.color.light_pink))
-        colors.add(resources.getColor(R.color.purple_700))
         // colors.add(resources.getColor(R.color.light_pink_1))
         dataSet.colors = colors
         // on below line we are setting pie data set
@@ -418,20 +459,20 @@ class GraphFragment : Fragment(),View.OnClickListener {
         appusage.Utils.roundOffDecimal(week3Percentage.toDouble())
         val circleText2= "week3"+"\n"+ appusage.Utils.roundOffDecimal(week3Percentage.toDouble())+"%"
         circle2Text.text=circleText2
-        customCircle3.visibility=View.VISIBLE
-        circle3Text.visibility=View.VISIBLE
+//        customCircle3.visibility=View.VISIBLE
+//        circle3Text.visibility=View.VISIBLE
         val circleText3="week2"+"\n"+ appusage.Utils.roundOffDecimal(week2Percentage.toDouble())+"%"
-        circle3Text.text=circleText3
-        customCircle4.visibility=View.VISIBLE
-        circle4Text.visibility=View.VISIBLE
+//        circle3Text.text=circleText3
+//        customCircle4.visibility=View.VISIBLE
+//        circle4Text.visibility=View.VISIBLE
         val circleText4="week1"+"\n"+ appusage.Utils.roundOffDecimal(week1Percentage.toDouble())+"%"
-        circle4Text.text=circleText4
-        customCircle5.visibility=View.GONE
-        circle5Text.visibility=View.GONE
-        customCircle6.visibility=View.GONE
-        circle6Text.visibility=View.GONE
-        customCircle7.visibility=View.GONE
-        circle7Text.visibility=View.GONE
+//        circle4Text.text=circleText4
+//        customCircle5.visibility=View.GONE
+//        circle5Text.visibility=View.GONE
+//        customCircle6.visibility=View.GONE
+//        circle6Text.visibility=View.GONE
+//        customCircle7.visibility=View.GONE
+//        circle7Text.visibility=View.GONE
 
 
         //entries.add(PieEntry(remaining))
@@ -451,10 +492,10 @@ class GraphFragment : Fragment(),View.OnClickListener {
         dataSet.selectionShift = 5f
         // add a lot of colors to list
         val colors: ArrayList<Int> = ArrayList()
-        colors.add(resources.getColor(R.color.purple_200))
-        colors.add(resources.getColor(R.color.yellow))
-        colors.add(resources.getColor(R.color.red))
+        colors.add(resources.getColor(R.color.purple))
         colors.add(resources.getColor(R.color.teal_200))
+        colors.add(resources.getColor(R.color.orange))
+        colors.add(resources.getColor(R.color.green_Shade_1))
 
         // colors.add(resources.getColor(R.color.light_pink_1))
         dataSet.colors = colors
@@ -491,23 +532,21 @@ class GraphFragment : Fragment(),View.OnClickListener {
     }
 
     private fun listeners() {
-        view_back.setOnClickListener(this)
-        tab_today.setOnClickListener(this)
-        tab_week.setOnClickListener(this)
-        tab_month.setOnClickListener(this)}
+        today.setOnClickListener(this)
+        sevenDays.setOnClickListener(this)
+        month.setOnClickListener(this)
+    }
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.view_back -> {
-                findNavController().navigate(R.id.action_graphFragment_to_homeFragment)
-            }
-            R.id.tab_today -> {
-                tab_today.setHintTextColor(resources.getColor(R.color.color_green))
-                today_underline.setBackgroundColor(resources.getColor(R.color.color_green))
-                tab_week.setHintTextColor(resources.getColor(R.color.color_black))
-                week_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-                tab_month.setHintTextColor(resources.getColor(R.color.color_black))
-                month_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+
+            R.id.today -> {
+                today_shape_view.visibility=View.VISIBLE
+                today.setTextColor(Color.parseColor("#4530B2"))
+                seven_days_shape_view.visibility=View.GONE
+                sevenDays.setTextColor(Color.parseColor("#FFFFFFFF"))
+                month_shape_view.visibility=View.GONE
+                month.setTextColor(Color.parseColor("#FFFFFFFF"))
                 progressBar.visibility=View.VISIBLE
 
                 Handler().postDelayed({
@@ -517,13 +556,13 @@ class GraphFragment : Fragment(),View.OnClickListener {
 
                 }, Constants.DELAY_TIME.toLong())
             }
-            R.id.tab_week -> {
-                tab_today.setHintTextColor(resources.getColor(R.color.color_black))
-                today_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-                tab_week.setHintTextColor(resources.getColor(R.color.color_green))
-                week_underline.setBackgroundColor(resources.getColor(R.color.color_green))
-                tab_month.setHintTextColor(resources.getColor(R.color.color_black))
-                month_underline.setBackgroundColor(resources.getColor(R.color.color_white))
+            R.id.sevenDays -> {
+                today_shape_view.visibility=View.GONE
+                today.setTextColor(Color.parseColor("#FFFFFFFF"))
+                seven_days_shape_view.visibility=View.VISIBLE
+                sevenDays.setTextColor(Color.parseColor("#4530B2"))
+                month_shape_view.visibility=View.GONE
+                month.setTextColor(Color.parseColor("#FFFFFFFF"))
                 progressBar.visibility=View.VISIBLE
                 Handler().postDelayed({
 
@@ -532,13 +571,13 @@ class GraphFragment : Fragment(),View.OnClickListener {
 
                 }, Constants.DELAY_TIME.toLong())
             }
-            R.id.tab_month -> {
-                tab_today.setHintTextColor(resources.getColor(R.color.color_black))
-                today_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-                tab_week.setHintTextColor(resources.getColor(R.color.color_black))
-                week_underline.setBackgroundColor(resources.getColor(R.color.color_white))
-                tab_month.setHintTextColor(resources.getColor(R.color.color_green))
-                month_underline.setBackgroundColor(resources.getColor(R.color.color_green))
+            R.id.month -> {
+                today_shape_view.visibility=View.GONE
+                today.setTextColor(Color.parseColor("#FFFFFFFF"))
+                seven_days_shape_view.visibility=View.GONE
+                sevenDays.setTextColor(Color.parseColor("#FFFFFFFF"))
+                month_shape_view.visibility=View.VISIBLE
+                month.setTextColor(Color.parseColor("#4530B2"))
                 progressBar.visibility=View.VISIBLE
 
                 Handler().postDelayed({

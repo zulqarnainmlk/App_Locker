@@ -94,7 +94,8 @@ class MainActivity : AppCompatActivity(), HomeListener, View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.back_button -> {
-                openHomeFragment()
+//                openHomeFragment()
+                this.onBackPressed()
                 Log.e("OnClick", "back_button ")
 //                val intent = Intent(this, MainActivity2::class.java)
 //                startActivity(intent)
@@ -103,13 +104,13 @@ class MainActivity : AppCompatActivity(), HomeListener, View.OnClickListener {
         }
     }
 
-    private fun openHomeFragment() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        val navGraph = navController.navInflater.inflate(R.navigation.my_nav)
-        navController.navigate(R.id.homeFragment)    }
+//    private fun openHomeFragment() {
+//        val navHostFragment =
+//            supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+//        val navController = navHostFragment.navController
+//
+//        val navGraph = navController.navInflater.inflate(R.navigation.my_nav)
+//        navController.navigate(R.id.homeFragment)    }
 
 
 }

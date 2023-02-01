@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/white_shade_2"
     tools:context="fragments.SignupFragment">
+
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
@@ -23,6 +25,22 @@
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="-206dp">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_horizontal_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/backgrond"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_horizontal_guideline"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_inner_start_horizontal"
@@ -135,6 +153,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/white"
                 android:hint="First Name"
+                android:enabled="true"
                 android:imeOptions="actionNext"
                 android:inputType="textCapSentences"
                 android:maxLines="1"
@@ -193,6 +212,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/white"
                 android:hint="Last Name"
+                android:enabled="true"
                 android:imeOptions="actionNext"
                 android:inputType="textCapSentences"
                 android:maxLines="1"
@@ -252,6 +272,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/white"
                 android:hint="Email"
+                android:enabled="true"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -308,21 +329,22 @@
                 android:id="@+id/password_signup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/white"
+                android:fontFamily="@font/sf_ui_display_text"
                 android:hint="Password"
+                android:enabled="true"
+                android:maxLength="15"
+
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingStart="@dimen/_10sdp"
                 android:singleLine="true"
-                android:fontFamily="@font/sf_ui_display_text"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray_shade_1"
                 android:textSize="@dimen/_12sdp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/password_end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/password_start_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -330,7 +352,7 @@
                 android:id="@+id/password_visible"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/password_eye_icon"
+                android:src="@drawable/current_pas_eye_visible"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/password_end_guideline"
@@ -341,7 +363,7 @@
                 android:layout_width="@dimen/_13sdp"
                 android:layout_height="@dimen/_13sdp"
                 android:layout_marginStart="@dimen/_1sdp"
-                android:src="@drawable/invisible_eye_icon"
+                android:src="@drawable/current_pass_eye_invisible"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/password_end_guideline"
@@ -388,12 +410,14 @@
                 android:id="@+id/cn_password_signup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/white"
+                android:fontFamily="@font/sf_ui_display_text"
                 android:hint="Confirm Password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
-                android:fontFamily="@font/sf_ui_display_text"
+                android:maxLength="15"
+                android:enabled="true"
+
                 android:maxLines="1"
                 android:paddingStart="@dimen/_10sdp"
                 android:singleLine="true"
@@ -402,7 +426,6 @@
                 android:textSize="@dimen/_12sdp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cn_password_end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/cn_password_start_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -410,7 +433,7 @@
                 android:id="@+id/cn_password_visible"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/password_eye_icon"
+                android:src="@drawable/current_pas_eye_visible"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/cn_password_end_guideline"
@@ -421,7 +444,7 @@
                 android:layout_width="@dimen/_13sdp"
                 android:layout_height="@dimen/_13sdp"
                 android:layout_marginStart="@dimen/_1sdp"
-                android:src="@drawable/invisible_eye_icon"
+                android:src="@drawable/current_pass_eye_invisible"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/cn_password_end_guideline"

@@ -6,147 +6,7 @@
     android:background="@color/white_shade_2"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragments.LoginFragment">
-<!--    <androidx.constraintlayout.widget.Guideline-->
-<!--        android:id="@+id/guideline1"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintGuide_percent="0.05" />-->
 
-<!--    <androidx.constraintlayout.widget.Guideline-->
-<!--        android:id="@+id/guideline2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintGuide_percent="0.95" />-->
-
-
-<!--    <com.airbnb.lottie.LottieAnimationView-->
-<!--        android:id="@+id/animationView"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/guideline2"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/guideline1"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:lottie_autoPlay="true"-->
-<!--        app:lottie_loop="true"-->
-<!--        app:lottie_rawRes="@raw/animations" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/tv1"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/animationView"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:text="@string/welcome_to_applocker"-->
-<!--        android:textColor="@color/colorPrimary"-->
-<!--        android:textSize="25sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/guideline2"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/guideline1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/animationView" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/tv2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/tv1"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:text="@string/keep_your_apps_safe"-->
-<!--        android:textColor="@color/colorPrimary"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/guideline2"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/guideline1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tv1" />-->
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/email"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/tv2"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        app:endIconMode="clear_text"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/guideline2"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/guideline1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tv2">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/useremail"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:singleLine="true"-->
-<!--            android:imeOptions="actionNext"-->
-<!--            android:hint="@string/email">-->
-
-<!--        </com.google.android.material.textfield.TextInputEditText>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/password"-->
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        app:endIconMode="password_toggle"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/guideline2"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/guideline1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/email"-->
-<!--        >-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/userpassword"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:inputType="textPassword"-->
-<!--            android:singleLine="true"-->
-<!--            android:imeOptions="actionGo"-->
-<!--            android:hint="@string/password"-->
-<!--            android:maxLength="16">-->
-
-<!--        </com.google.android.material.textfield.TextInputEditText>-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/check"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text="@string/signup_desc"-->
-<!--        android:textSize="16sp"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/guideline1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/password" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/signup"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text="@string/signup"-->
-<!--        android:textColor="@color/colorPrimary"-->
-<!--        android:textSize="16sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/guideline2"-->
-
-<!--        app:layout_constraintHorizontal_bias="0.089"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/check"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/password" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button_login"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        android:background="@drawable/signin_btn"-->
-<!--        android:text="@string/login"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/guideline2"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/guideline1"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/check" />-->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
@@ -161,9 +21,35 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline_end_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="-206dp">
+        app:layout_constraintVertical_bias="1.0">
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_horizontal_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/backgrond"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_horizontal_guideline"/>
+
+
+
+
+
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_inner_start_horizontal"
@@ -185,6 +71,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_inner_middle_horizontal"
             android:layout_width="wrap_content"
@@ -265,8 +152,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/white"
-                android:hint="Email"
                 android:fontFamily="@font/sf_ui_display_text"
+                android:hint="Email"
+                android:enabled="true"
+
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -334,21 +223,22 @@
                 android:id="@+id/password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/white"
+                android:fontFamily="@font/sf_ui_display_text"
                 android:hint="Password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
+                android:enabled="true"
+
                 android:maxLines="1"
+                android:maxLength="15"
                 android:paddingStart="@dimen/_10sdp"
                 android:singleLine="true"
-                android:fontFamily="@font/sf_ui_display_text"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray_shade_1"
                 android:textSize="@dimen/_12sdp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/password_end_guideline"
                 app:layout_constraintStart_toStartOf="@+id/password_start_guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -356,7 +246,7 @@
                 android:id="@+id/password_visible"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/password_eye_icon"
+                android:src="@drawable/current_pas_eye_visible"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/password_end_guideline"
@@ -367,7 +257,7 @@
                 android:layout_width="@dimen/_13sdp"
                 android:layout_height="@dimen/_13sdp"
                 android:layout_marginStart="@dimen/_1sdp"
-                android:src="@drawable/invisible_eye_icon"
+                android:src="@drawable/current_pass_eye_invisible"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/password_end_guideline"
@@ -383,8 +273,8 @@
             android:paddingStart="@dimen/_10sdp"
             android:text="jyydfysgfkaegavidaeidiaediaediaeiiae"
             android:textColor="@color/white"
-            android:visibility="gone"
             android:textSize="@dimen/_10sdp"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/guideline_inner_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_inner_start"
             app:layout_constraintTop_toBottomOf="@+id/passwordConstraint" />

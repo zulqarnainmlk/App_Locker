@@ -3,143 +3,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_shade_2"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragments.ResetPinFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:id="@+id/constraint_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/top_guideline">
 
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <View
-            android:id="@+id/view_back"
-            android:layout_width="90dp"
-            android:layout_height="60dp"
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:src="@drawable/ovalshape"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_back"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/person_icon"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+
+        android:text="name"
+        android:textColor="@color/purple"
+        android:fontFamily="@font/sf_ui_display_heading"
+        android:textSize="@dimen/_20sdp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_profile"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Enter your current 6 digit lock PIN to"
+        android:maxLines="1"
+        android:fontFamily="@font/sf_ui_display_text"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Update PIN"
+        android:fontFamily="@font/sf_ui_display_text"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"/>
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/current_pin_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/circular_bold"
-
-            android:text="@string/title"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <RelativeLayout
-            android:id="@+id/profile_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <FrameLayout
-                android:layout_width="110.00dp"
-                android:layout_height="110.00dp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:elevation="5.00dp">
-
-                <ImageView
-                    android:id="@+id/profileImg"
-                    android:layout_width="110.00dp"
-                    android:layout_height="110.00dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/famicare_logo"
-                    app:civ_border_color="@color/block_bg"
-                    app:civ_border_width="1dp" />
-            </FrameLayout>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_ll">
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-
-                android:text="Generate Pin"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Enter your current 6 digit lock PIN to"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:hint="Update PIN"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
-        </LinearLayout>
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="Current Pin"
+            android:textColor="@color/purple"
+            android:textSize="15sp"
+            android:fontFamily="@font/sf_ui_display_heading"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toBottomOf="@+id/mid_guideline" />
 
         <com.goodiebag.pinview.Pinview
             android:id="@+id/current_pin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:imeOptions="actionNext"
             android:singleLine="true"
             app:cursorVisible="false"
             app:forceKeyboard="false"
+            android:layout_marginTop="@dimen/_5sdp"
             app:inputType="number"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintTop_toBottomOf="@+id/current_pin_text"
             app:password="true"
             app:pinBackground="@drawable/pinviewbackground"
             app:pinHeight="42dp"
@@ -148,15 +113,15 @@
             app:textSize="5sp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/new_pin_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:text="New Pin"
-            android:textColor="@color/black"
+            android:textColor="@color/purple"
             android:textSize="15sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/sf_ui_display_heading"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
             app:layout_constraintTop_toBottomOf="@+id/current_pin" />
 
@@ -172,7 +137,7 @@
             app:inputType="number"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/new_pin_text"
             app:password="true"
             app:pinBackground="@drawable/pinviewbackground"
             app:pinHeight="42dp"
@@ -181,41 +146,46 @@
             app:textSize="5sp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/reset_pin"-->
+<!--            android:layout_width="@dimen/_100sdp"-->
+<!--            android:layout_height="@dimen/_40sdp"-->
+<!--            android:layout_marginTop="@dimen/_30sdp"-->
+<!--            app:cardBackgroundColor="@android:color/transparent"-->
+<!--            app:cardCornerRadius="35dp"-->
+<!--            app:cardElevation="0dp"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/guideline8"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/new_pin">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/btn_add_new_parent_bg" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_add_new_parent_btn_txt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="Update"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="18sp" />-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+        <Button
+            android:id="@+id/reset_pin"
+            android:layout_width="@dimen/_120sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/new_pin">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/reset_pin"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="15dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="35dp"
-                app:cardElevation="0dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:src="@drawable/btn_add_new_parent_bg"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_add_new_parent_btn_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Update"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="Update"
+            android:textSize="@dimen/_12sdp"
+            android:textAllCaps="false"
+            android:background="@drawable/btn_add_new_parent_bg"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toBottomOf="@+id/new_pin" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
@@ -230,8 +200,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mid_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>

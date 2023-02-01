@@ -18,15 +18,23 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.app_locker.R
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import helper.Constants
 import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_biometric.*
-import kotlinx.android.synthetic.main.fragment_profile.title
-import kotlinx.android.synthetic.main.fragment_profile.view_back
+import kotlinx.android.synthetic.main.fragment_biometric.tvTitle
+import listeners.HomeListener
+
 import java.util.concurrent.Executor
 
 
-class BiometricFragment : Fragment(),View.OnClickListener {
+class BiometricFragment : Fragment() {
+    private lateinit var googleSignInClient: GoogleSignInClient
+    var mAuth: FirebaseAuth? = null
+    private var db_ref: DatabaseReference? = null
+    private var db_User: FirebaseDatabase? = null
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var executor: Executor
     private lateinit var callBack: BiometricPrompt.AuthenticationCallback
@@ -36,7 +44,21 @@ class BiometricFragment : Fragment(),View.OnClickListener {
         const val RC_BIOMETRICS_ENROLL = 10
         const val RC_DEVICE_CREDENTIAL_ENROLL = 18
     }
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = true,
+            backBtnVisibility = true,
+            newTitle = "Pin and Biometric"
 
+
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,13 +70,46 @@ class BiometricFragment : Fragment(),View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         init()
         checkDeviceCanAuthenticateWithBiometrics()
-        title.text = getString(R.string.pin_biometric)
     }
     private fun init() {
-        listeners()
+        checkUser()
         defaultView()
         switchChecker()
         inAuth()
+    }
+    private fun checkUser() {
+        if (Sharepref.getBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)) {
+            val displayName = Sharepref.getString(requireContext(), Constants.DISPLAY_NAME, "")
+            tvTitle.text = displayName
+
+        } else {
+
+
+            val uid = Sharepref.getString(requireActivity(), Constants.CURRENT_USER_UID, "")
+            db_User = FirebaseDatabase.getInstance()
+            db_ref = db_User!!.getReference("CustomUsers").child(uid!!)
+            db_ref!!.addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val firstName = dataSnapshot.child("firstname").getValue(
+                        String::class.java
+                    )
+                    val lastName = dataSnapshot.child("lastname").getValue(
+                        String::class.java
+                    )
+                    val displayName = "$firstName $lastName"
+                    tvTitle.text= displayName!!
+
+                    Log.e("Testing: ", firstName!! + "\n" + lastName!!)
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+            })
+
+
+        }
     }
     private fun defaultView() {
         Log.e("switch1",Sharepref.getString(requireContext(), Constants.PIN_GENERATED,"").toString())
@@ -279,16 +334,5 @@ class BiometricFragment : Fragment(),View.OnClickListener {
             biometricPrompt.authenticate(promptInfo)
         }
     }
-    private fun listeners() {
 
-        view_back.setOnClickListener(this)
-
-    }
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.view_back -> {
-                findNavController().navigate(R.id.action_biometricFragment_to_profileFragment)
-            }
-        }
-    }
 }

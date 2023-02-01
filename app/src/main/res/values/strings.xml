@@ -71,9 +71,9 @@
     <string name="month">Month</string>
     <string name="pin_and_biometric">Pin and Biometric</string>
     <string name="pin_biometric">Pin and Biometric</string>
-    <string name="create_pin">Create PIN</string>
+    <string name="set_pin">Set PIN</string>
     <string name="on">On</string>
-    <string name="set_biometric_verification">Set Biometric Verification</string>
+    <string name="set_biometric">Set Biometric</string>
     <string name="title_biometric_dialog">Biometrics</string>
     <string name="text_description_biometrics_dialog">Use biometrics to continue.</string>
     <string name="text_negative_button_biometric_dialog">Use other way</string>

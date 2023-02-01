@@ -227,9 +227,11 @@ class LoginFragment : Fragment(), View.OnClickListener{
                 if(password_visible.isVisible)
                 {
                     password_visible.visibility=View.GONE
-                    password_invisible.visibility=View.VISIBLE
                     password.transformationMethod =
-                        PasswordTransformationMethod.getInstance()
+                        HideReturnsTransformationMethod.getInstance()
+                    password_invisible.visibility=View.VISIBLE
+
+
                 }
             }
             R.id.password_invisible ->
@@ -237,9 +239,11 @@ class LoginFragment : Fragment(), View.OnClickListener{
                 if(password_invisible.isVisible)
                 {
                     password_invisible.visibility=View.GONE
-                    password_visible.visibility=View.VISIBLE
+
                     password.transformationMethod =
-                        HideReturnsTransformationMethod.getInstance()
+                        PasswordTransformationMethod.getInstance()
+                    password_visible.visibility=View.VISIBLE
+
                 }
             }
             R.id.signIn_button_login -> {

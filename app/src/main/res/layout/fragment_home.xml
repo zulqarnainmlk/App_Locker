@@ -229,8 +229,8 @@
 
       <ImageView
           android:id="@+id/graph_icon"
-          android:layout_width="@dimen/_10sdp"
-          android:layout_height="@dimen/_10sdp"
+          android:layout_width="@dimen/_11sdp"
+          android:layout_height="@dimen/_11sdp"
           android:layout_marginStart="@dimen/_18sdp"
           android:src="@drawable/graph_svg_icon_mdpi"
           android:textColor="@color/white"

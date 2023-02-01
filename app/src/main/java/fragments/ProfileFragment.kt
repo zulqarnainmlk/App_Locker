@@ -1,5 +1,6 @@
 package fragments
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ import com.google.firebase.database.*
 import helper.Constants
 import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_profile.*
+import listeners.HomeListener
 
 
 class ProfileFragment : Fragment(), View.OnClickListener {
@@ -26,7 +28,21 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     var mAuth: FirebaseAuth? = null
     private var db_ref: DatabaseReference? = null
     private var db_User: FirebaseDatabase? = null
+    private lateinit var homeListener: HomeListener
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        homeListener = context as HomeListener
+    }
+    override fun onResume() {
+        super.onResume()
+        homeListener.onHomeDataChangeListener(
+            toolbarVisibility = true,
+            backBtnVisibility = true,
+            newTitle = "Profile"
 
+
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +55,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        title.text = getString(R.string.profile)
     }
 
     private fun init() {
@@ -49,14 +64,18 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     private fun checkUser() {
-        if (Sharepref.getBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false))
-        {
-            val displayName=Sharepref.getString(requireContext(),Constants.DISPLAY_NAME,"")
-            user_name.text=displayName
-            change_pass_card.visibility=View.GONE
-        }
-        else
-        {    val uid= Sharepref.getString(requireActivity(), Constants.CURRENT_USER_UID, "")
+        if (Sharepref.getBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)) {
+            val displayName = Sharepref.getString(requireContext(), Constants.DISPLAY_NAME, "")
+            user_name.text = displayName
+            constraint_logout.visibility = View.GONE
+            constraint_changePass.visibility = View.GONE
+            constraint_logout_gmail.visibility = View.VISIBLE
+        } else {
+            constraint_logout.visibility = View.VISIBLE
+            constraint_changePass.visibility = View.VISIBLE
+            constraint_logout_gmail.visibility = View.GONE
+
+            val uid = Sharepref.getString(requireActivity(), Constants.CURRENT_USER_UID, "")
             db_User = FirebaseDatabase.getInstance()
             db_ref = db_User!!.getReference("CustomUsers").child(uid!!)
             db_ref!!.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -68,10 +87,17 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                     val lastName = dataSnapshot.child("lastname").getValue(
                         String::class.java
                     )
-                    val displayName= "$firstName $lastName"
-                    user_name.text = displayName!!
+                    try {
+                        val displayName = "$firstName $lastName"
+                        user_name.text = displayName
+                    }
+                    catch (ex:Exception)
+                    {
 
-                    Log.e("Testing: ", firstName!! + "\n" +lastName!!)
+                    }
+
+
+                    Log.e("Testing: ", firstName!! + "\n" + lastName!!)
                 }
 
                 override fun onCancelled(p0: DatabaseError) {
@@ -80,44 +106,38 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             })
 
 
-
-
         }
     }
 
 
     private fun listeners() {
-        view_back.setOnClickListener(this)
-        home_tab.setOnClickListener(this)
-        apps_tab.setOnClickListener(this)
-        vault_tab.setOnClickListener(this)
-        profile_tab.setOnClickListener(this)
-        reset_card.setOnClickListener(this)
-        change_pass_card.setOnClickListener(this)
-        set_Pin.setOnClickListener(this)
-        button_logout.setOnClickListener(this)
+
+        constraint_resetPIN.setOnClickListener(this)
+        constraint_changePass.setOnClickListener(this)
+        constraint_pin_biometric.setOnClickListener(this)
+        constraint_logout_gmail.setOnClickListener(this)
+        constraint_logout.setOnClickListener(this)
+        constraint_logout_gmail.setOnClickListener(this)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.view_back -> {
-                findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
-            }
-            R.id.set_Pin->{
+            R.id.constraint_pin_biometric -> {
                 findNavController().navigate(R.id.action_profileFragment_to_biometricFragment)
 
             }
 
-            R.id.reset_card -> {
+            R.id.constraint_resetPIN -> {
                 findNavController().navigate(R.id.action_profileFragment_to_resetPinFragment)
 
             }
-            R.id.change_pass_card -> {
+            R.id.constraint_changePass -> {
                 findNavController().navigate(R.id.action_profileFragment_to_updateFragment)
             }
 
-            R.id.button_logout -> {
+            R.id.constraint_logout_gmail -> {
                 val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
                     .requestEmail()
@@ -131,46 +151,34 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 //
 //                    }
 //                }
-                if (Sharepref.getBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)
 
-                ) {
-                    googleSignInClient.signOut().addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            Log.e("signout:", "gmail-signout")
-                            Sharepref.setBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)
+                googleSignInClient.signOut().addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Log.e("signout:", "gmail-signout")
+                        Sharepref.setBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)
 
-                            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+                        findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
 
-                        } else {
-                            Log.e("signout", "gmail-signout-failed")
+                    } else {
+                        Log.e("signout", "gmail-signout-failed")
 
-                        }
                     }
+                }
 
-                } else {
+
+
+                }
+            R.id.constraint_logout -> {
+
                     FirebaseAuth.getInstance().signOut()
                     Sharepref.setBoolean(requireActivity(), Constants.IS_LOGIN, false)
                     Sharepref.setBoolean(requireActivity(), Constants.IS_SIGNUP, false)
                     findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
-                }
-            }
-            R.id.home_tab -> {
-                findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
-
-            }
-            R.id.apps_tab -> {
-                findNavController().navigate(R.id.action_profileFragment_to_appsFragment)
-            }
-            R.id.vault_tab -> {
-                findNavController().navigate(R.id.action_profileFragment_to_vaultFragment)
-
-            }
-            R.id.profile_tab -> {
-                Toast.makeText(requireContext(), "Profile", Toast.LENGTH_SHORT).show()
-
             }
 
+
+            }
         }
     }
 
-}
+
