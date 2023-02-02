@@ -85,6 +85,15 @@ class GraphFragment : Fragment(),View.OnClickListener {
         progressBar.visibility=View.GONE
     }
     private fun todayGraphView() {
+        today_percentage.visibility=View.VISIBLE
+        remain_percentage.visibility=View.VISIBLE
+        weekly_today.visibility=View.GONE
+        weekly_previous.visibility=View.GONE
+        weekly_two_days_ago.visibility=View.GONE
+        weekly_three_days_ago.visibility=View.GONE
+        weekly_four_days_ago.visibility=View.GONE
+        weekly_five_days_ago.visibility=View.GONE
+        weekly_six_days_ago.visibility=View.GONE
         pieChart.setUsePercentValues(false)
         pieChart.description.isEnabled = false
         pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
@@ -213,6 +222,15 @@ class GraphFragment : Fragment(),View.OnClickListener {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun weeklyGraphView() {
+        today_percentage.visibility=View.GONE
+        remain_percentage.visibility=View.GONE
+        weekly_today.visibility=View.VISIBLE
+        weekly_previous.visibility=View.VISIBLE
+        weekly_two_days_ago.visibility=View.VISIBLE
+        weekly_three_days_ago.visibility=View.VISIBLE
+        weekly_four_days_ago.visibility=View.VISIBLE
+        weekly_five_days_ago.visibility=View.VISIBLE
+        weekly_six_days_ago.visibility=View.VISIBLE
         pieChart.setUsePercentValues(true)
         pieChart.description.isEnabled = false
         pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
@@ -307,11 +325,53 @@ class GraphFragment : Fragment(),View.OnClickListener {
 //        entries.add(PieEntry(0f))
         ///////////////////////////////data set for textViews////////////////////////////////////////
         appusage.Utils.roundOffDecimal(ago_percent.toDouble())
-        val circleText1= getCalculatedDate("", "dd-MM-yyyy", -1)+"\n"+appusage.Utils.roundOffDecimal(ago_percent.toDouble())+"%"
-        circle1Text.text=circleText1
-        appusage.Utils.roundOffDecimal(remaining.toDouble())
-        val circleText2= getCalculatedDate("", "dd-MM-yyyy", -2)+"\n"+ appusage.Utils.roundOffDecimal(two_days_ago_percent.toDouble())+"%"
-        circle2Text.text=circleText2
+//        val circleText1= getCalculatedDate("", "dd-MM-yyyy", -1)+"\n"+appusage.Utils.roundOffDecimal(ago_percent.toDouble())+"%"
+//        circle1Text.text=circleText1
+        weekly_today_text.text=getCalculatedDate("", "dd-MM-yyyy", -1)
+        val  weekly_today= appusage.Utils.roundOffDecimal(ago_percent.toDouble())
+        weekly_today_percent.text= buildString {
+            append(weekly_today.toString())
+            append("%")
+        }
+        weekly_previous_text.text=getCalculatedDate("", "dd-MM-yyyy", -2)
+        val  weekly_previous= appusage.Utils.roundOffDecimal(two_days_ago_percent.toDouble())
+        weekly_previous_percent.text= buildString {
+            append(weekly_previous.toString())
+            append("%")
+        }
+        weekly_two_days_ago_text.text=getCalculatedDate("", "dd-MM-yyyy", -3)
+        val  weekly_two_days_ago= appusage.Utils.roundOffDecimal(three_days_ago_percent.toDouble())
+        weekly_two_days_ago_percent.text= buildString {
+            append(weekly_two_days_ago.toString())
+            append("%")
+        }
+        weekly_three_days_ago_text.text=getCalculatedDate("", "dd-MM-yyyy", -4)
+        val  weekly_three_days_ago= appusage.Utils.roundOffDecimal(four_days_ago_percent.toDouble())
+        weekly_three_days_ago_percent.text= buildString {
+            append(weekly_three_days_ago.toString())
+            append("%")
+        }
+        weekly_four_days_ago_text.text=getCalculatedDate("", "dd-MM-yyyy", -5)
+        val  weekly_four_days_ago= appusage.Utils.roundOffDecimal(five_days_ago_percent.toDouble())
+        weekly_four_days_ago_percent.text= buildString {
+            append(weekly_four_days_ago.toString())
+            append("%")
+        }
+        weekly_five_days_ago_text.text=getCalculatedDate("", "dd-MM-yyyy", -6)
+        val  weekly_five_days_ago= appusage.Utils.roundOffDecimal(six_days_ago_percent.toDouble())
+        weekly_five_days_ago_percent.text= buildString {
+            append(weekly_five_days_ago.toString())
+            append("%")
+        }
+        weekly_six_days_ago_text.text=getCalculatedDate("", "dd-MM-yyyy", -7)
+        val  weekly_six_days_ago= appusage.Utils.roundOffDecimal(seven_days_ago_percent.toDouble())
+        weekly_six_days_ago_percent.text= buildString {
+            append(weekly_six_days_ago.toString())
+            append("%")
+        }
+//        appusage.Utils.roundOffDecimal(remaining.toDouble())
+//        val circleText2= getCalculatedDate("", "dd-MM-yyyy", -2)+"\n"+ appusage.Utils.roundOffDecimal(two_days_ago_percent.toDouble())+"%"
+//        circle2Text.text=circleText2
 //        customCircle3.visibility=View.VISIBLE
 //        circle3Text.visibility=View.VISIBLE
         val circleText3=getCalculatedDate("", "dd-MM-yyyy", -3)+"\n"+ appusage.Utils.roundOffDecimal(three_days_ago_percent.toDouble())+"%"
@@ -371,6 +431,15 @@ class GraphFragment : Fragment(),View.OnClickListener {
         pieChart.invalidate()
             }
     private fun monthlyGraphView() {
+        today_percentage.visibility=View.GONE
+        remain_percentage.visibility=View.GONE
+        weekly_today.visibility=View.VISIBLE
+        weekly_previous.visibility=View.VISIBLE
+        weekly_two_days_ago.visibility=View.VISIBLE
+        weekly_three_days_ago.visibility=View.VISIBLE
+        weekly_four_days_ago.visibility=View.GONE
+        weekly_five_days_ago.visibility=View.GONE
+        weekly_six_days_ago.visibility=View.GONE
         pieChart.setUsePercentValues(true)
         pieChart.description.isEnabled = false
         pieChart.setExtraOffsets(5f, 10f, 5f, 5f)
@@ -453,12 +522,36 @@ class GraphFragment : Fragment(),View.OnClickListener {
         entries.add(PieEntry(week2Percentage,getString(R.string.week2)))
         entries.add(PieEntry(week1Percentage,getString(R.string.week1)))
         ////////////// set values for textViews
-        appusage.Utils.roundOffDecimal(week4Percentage.toDouble())
-        val circleText1= "week4"+"\n"+appusage.Utils.roundOffDecimal(week4Percentage.toDouble())+"%"
-        circle1Text.text=circleText1
-        appusage.Utils.roundOffDecimal(week3Percentage.toDouble())
-        val circleText2= "week3"+"\n"+ appusage.Utils.roundOffDecimal(week3Percentage.toDouble())+"%"
-        circle2Text.text=circleText2
+        weekly_today_text.text="week4"
+        val  week_four= appusage.Utils.roundOffDecimal(week4Percentage.toDouble())
+        weekly_today_percent.text= buildString {
+            append(week_four.toString())
+            append("%")
+        }
+        weekly_previous_text.text="week3"
+        val  week_three= appusage.Utils.roundOffDecimal(week3Percentage.toDouble())
+        weekly_previous_percent.text= buildString {
+            append(week_three.toString())
+            append("%")
+        }
+        weekly_two_days_ago_text.text="week2"
+        val  week_two= appusage.Utils.roundOffDecimal(week2Percentage.toDouble())
+        weekly_two_days_ago_percent.text= buildString {
+            append(week_two.toString())
+            append("%")
+        }
+        weekly_three_days_ago_text.text="week1"
+        val  week_one= appusage.Utils.roundOffDecimal(week1Percentage.toDouble())
+        weekly_three_days_ago_percent.text= buildString {
+            append(week_one.toString())
+            append("%")
+        }
+//        appusage.Utils.roundOffDecimal(week4Percentage.toDouble())
+//        val circleText1= "week4"+"\n"+appusage.Utils.roundOffDecimal(week4Percentage.toDouble())+"%"
+//        circle1Text.text=circleText1
+//        appusage.Utils.roundOffDecimal(week3Percentage.toDouble())
+//        val circleText2= "week3"+"\n"+ appusage.Utils.roundOffDecimal(week3Percentage.toDouble())+"%"
+//        circle2Text.text=circleText2
 //        customCircle3.visibility=View.VISIBLE
 //        circle3Text.visibility=View.VISIBLE
         val circleText3="week2"+"\n"+ appusage.Utils.roundOffDecimal(week2Percentage.toDouble())+"%"
