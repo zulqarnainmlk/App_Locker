@@ -104,22 +104,23 @@ class GraphFragment : Fragment(),View.OnClickListener {
         // on below line we are setting hole
         // and hole color for pie chart
         pieChart.isDrawHoleEnabled = true
-        pieChart.setHoleColor(Color.WHITE)
+//        pieChart.setHoleColor(Color.WHITE)
 
         // on below line we are setting circle color and alpha
         pieChart.setTransparentCircleColor(Color.WHITE)
         pieChart.setTransparentCircleAlpha(110)
 
         // on  below line we are setting hole radius
-        pieChart.holeRadius = 58f
+        pieChart.holeRadius = 88f
         pieChart.transparentCircleRadius = 61f
 
         // on below line we are setting center text
         val today_Total_Time= Sharepref.getString(requireContext(),Constants.TODAY_TOTAL_TIME,"")
         pieChart.setDrawCenterText(true)
         pieChart.centerText=today_Total_Time
-        pieChart.setCenterTextSize(20f)
-        pieChart.setCenterTextColor(Color.BLACK)
+        pieChart.setCenterTextSize(30f)
+        pieChart.setCenterTextColor(Color.parseColor("#4530B2"))
+        pieChart.setHoleColor(Color.parseColor("#D8E3EB"))
 
         // on below line we are setting
         // rotation for our pie chart
@@ -241,7 +242,7 @@ class GraphFragment : Fragment(),View.OnClickListener {
         // on below line we are setting hole
         // and hole color for pie chart
         pieChart.isDrawHoleEnabled = true
-        pieChart.setHoleColor(Color.WHITE)
+//        pieChart.setHoleColor(Color.WHITE)
 
 
         // on below line we are setting circle color and alpha
@@ -249,7 +250,8 @@ class GraphFragment : Fragment(),View.OnClickListener {
         pieChart.setTransparentCircleAlpha(110)
 
         // on  below line we are setting hole radius
-        pieChart.holeRadius = 58f
+      //  pieChart.holeRadius = 58f
+        pieChart.holeRadius = 88f
         pieChart.transparentCircleRadius = 61f
         pieChart.setDrawEntryLabels(false)
 
@@ -257,9 +259,9 @@ class GraphFragment : Fragment(),View.OnClickListener {
         val weekly_Total_Time= Sharepref.getString(requireContext(),Constants.WEEKLY_TOTAL_TIME,"")
         pieChart.setDrawCenterText(true)
         pieChart.centerText=weekly_Total_Time
-        pieChart.setCenterTextSize(20f)
-        pieChart.setCenterTextColor(Color.BLACK)
-
+        pieChart.setCenterTextSize(30f)
+        pieChart.setCenterTextColor(Color.parseColor("#4530B2"))
+        pieChart.setHoleColor(Color.parseColor("#D8E3EB"))
         // on below line we are setting
         // rotation for our pie chart
         pieChart.rotationAngle = 0f
@@ -450,15 +452,13 @@ class GraphFragment : Fragment(),View.OnClickListener {
         // on below line we are setting hole
         // and hole color for pie chart
         pieChart.isDrawHoleEnabled = true
-        pieChart.setHoleColor(Color.WHITE)
-
-
+//        pieChart.setHoleColor(Color.WHITE)
         // on below line we are setting circle color and alpha
         pieChart.setTransparentCircleColor(Color.WHITE)
         pieChart.setTransparentCircleAlpha(110)
 
         // on  below line we are setting hole radius
-        pieChart.holeRadius = 58f
+        pieChart.holeRadius = 88f
         pieChart.transparentCircleRadius = 61f
         pieChart.setDrawEntryLabels(false)
 
@@ -466,8 +466,9 @@ class GraphFragment : Fragment(),View.OnClickListener {
         val monthly_Total_Time= Sharepref.getString(requireContext(),Constants.MONTHLY_TOTAL_TIME,"")
         pieChart.setDrawCenterText(true)
         pieChart.centerText=monthly_Total_Time
-        pieChart.setCenterTextSize(20f)
-        pieChart.setCenterTextColor(Color.BLACK)
+        pieChart.setCenterTextSize(30f)
+        pieChart.setCenterTextColor(Color.parseColor("#4530B2"))
+        pieChart.setHoleColor(Color.parseColor("#D8E3EB"))
 
         // on below line we are setting
         // rotation for our pie chart
