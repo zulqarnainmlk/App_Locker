@@ -326,7 +326,7 @@
         android:textColor="@color/gray_shade_1"
 
         android:textSize="@dimen/_13sdp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bottom_shape_vertical_guideline_5"
         app:layout_constraintStart_toStartOf="@+id/bottom_shape_vertical_guideline_4"
         app:layout_constraintTop_toTopOf="@+id/bottom_shape_horizontal" />
 
@@ -353,13 +353,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.57" />
+        app:layout_constraintGuide_percent="0.55" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_shape_vertical_guideline_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.78" />
+        app:layout_constraintGuide_percent="0.76" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_shape_vertical_guideline_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>

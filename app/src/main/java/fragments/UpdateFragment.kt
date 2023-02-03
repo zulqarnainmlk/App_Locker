@@ -1,6 +1,7 @@
 package fragments
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -22,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import helper.Constants
 import helper.Sharepref
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_reset_pin.*
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.android.synthetic.main.fragment_update.*
@@ -128,6 +130,7 @@ class UpdateFragment : Fragment(), View.OnClickListener {
         alert.setCancelable(true)
         dialog = alert.create()
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
         dialog!!.show()
     }
 
@@ -281,6 +284,11 @@ class UpdateFragment : Fragment(), View.OnClickListener {
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     Log.e("updated", "User password updated.")
+                                    Sharepref.setString(
+                                        requireContext(),
+                                        Constants.LOGIN_USER_PASSWORD,
+                                        encodedPassword
+                                    )
                                 }
                             }
                     }
