@@ -1,5 +1,8 @@
 package appusage
 
+import android.content.Context
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +11,11 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_locker.R
+import models.ListTodayModel
+import java.security.AccessController.getContext
 
-class UsageAdapter(private var mList: ArrayList<AppInfoModel>) : RecyclerView.Adapter<UsageAdapter.ViewHolder>() {
+
+class UsageAdapter(private val context: Context,private var mList: ArrayList<ListTodayModel>) : RecyclerView.Adapter<UsageAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsageAdapter.ViewHolder {
         // inflates the card_view_design view
         // that is used to hold list item
@@ -27,7 +33,13 @@ class UsageAdapter(private var mList: ArrayList<AppInfoModel>) : RecyclerView.Ad
         // sets the image to the imageview from our itemHolder class
         // sets the text to the textview from our itemHolder class
         holder.appName.text = AppInfo.appName
-        holder.appIcon.setImageDrawable(AppInfo.icon)
+        try {
+            val icon: Drawable =
+                context.packageManager.getApplicationIcon(AppInfo.packageName)
+            holder.appIcon.setImageDrawable(icon)
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
         holder.hour.text = AppInfo.hour
         holder.mint.text = AppInfo.mint
         holder.sec.text = AppInfo.sec

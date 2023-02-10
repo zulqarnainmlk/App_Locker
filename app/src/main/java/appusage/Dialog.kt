@@ -33,7 +33,7 @@ object Dialog
     }
     fun openAccessibilityDialog(context:Context,dialogListener: DialogListener) {
         val builder = AlertDialog.Builder(context)
-        builder.setTitle("Usage Access Needed :(")
+        builder.setTitle("Accessibility Access Needed :(")
             .setMessage(
                 "You need to give accessibility access to this app . " +
                         "Click \"Go To Settings\" and then give the access :)")

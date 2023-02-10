@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="fragments.VaultFragment"
     android:background="@color/white_shade_2">
+
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="match_parent"

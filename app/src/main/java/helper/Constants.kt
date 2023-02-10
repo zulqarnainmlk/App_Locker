@@ -13,7 +13,8 @@ object Constants {
     const val IS_GMAIL_LOGIN="is_gmail_login"
     const val DISPLAY_NAME="display_name"
     const val SPLASH_TIME = 3000
-    const val DELAY_TIME = 200
+    const val DELAY_TIME = 1000
+    const val LOAD_TIME = 50
     const val DELAY_TIME1 = 3000
     const val DELAY_TIME2 = 5000
     const val TAG="REWARDED_AD_TAG"

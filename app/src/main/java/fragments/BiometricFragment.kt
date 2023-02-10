@@ -24,13 +24,11 @@ import com.google.firebase.database.*
 import helper.Constants
 import helper.Sharepref
 import kotlinx.android.synthetic.main.fragment_biometric.*
-import kotlinx.android.synthetic.main.fragment_biometric.tvTitle
 import listeners.HomeListener
-
 import java.util.concurrent.Executor
 
 
-class BiometricFragment : Fragment() {
+class BiometricFragment : Fragment(), View.OnClickListener {
     private lateinit var googleSignInClient: GoogleSignInClient
     var mAuth: FirebaseAuth? = null
     private var db_ref: DatabaseReference? = null
@@ -39,16 +37,19 @@ class BiometricFragment : Fragment() {
     private lateinit var executor: Executor
     private lateinit var callBack: BiometricPrompt.AuthenticationCallback
     private var keyguardManager: KeyguardManager? = null
-    private var biometricNotSet:Boolean=false
+    private var biometricNotSet: Boolean = false
+
     companion object {
         const val RC_BIOMETRICS_ENROLL = 10
         const val RC_DEVICE_CREDENTIAL_ENROLL = 18
     }
+
     private lateinit var homeListener: HomeListener
     override fun onAttach(context: Context) {
         super.onAttach(context)
         homeListener = context as HomeListener
     }
+
     override fun onResume() {
         super.onResume()
         homeListener.onHomeDataChangeListener(
@@ -59,6 +60,7 @@ class BiometricFragment : Fragment() {
 
         )
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,17 +68,27 @@ class BiometricFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_biometric, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
         checkDeviceCanAuthenticateWithBiometrics()
     }
+
     private fun init() {
+
+        Log.e("Tsf", "BiometricFragment")
         checkUser()
         defaultView()
         switchChecker()
         inAuth()
+        listener()
     }
+
+    private fun listener(){
+        set_pin_view.setOnClickListener(this)
+    }
+
     private fun checkUser() {
         if (Sharepref.getBoolean(requireActivity(), Constants.IS_GMAIL_LOGIN, false)) {
             val displayName = Sharepref.getString(requireContext(), Constants.DISPLAY_NAME, "")
@@ -98,7 +110,7 @@ class BiometricFragment : Fragment() {
                         String::class.java
                     )
                     val displayName = "$firstName $lastName"
-                    tvTitle.text= displayName!!
+                    tvTitle.text = displayName
 
                     Log.e("Testing: ", firstName!! + "\n" + lastName!!)
                 }
@@ -111,82 +123,90 @@ class BiometricFragment : Fragment() {
 
         }
     }
+
     private fun defaultView() {
-        Log.e("switch1",Sharepref.getString(requireContext(), Constants.PIN_GENERATED,"").toString())
-        Log.e("switch2",Sharepref.getString(requireContext(), Constants.SET_BIOMETRIC,"").toString())
+        Log.e(
+            "switch1",
+            Sharepref.getString(requireContext(), Constants.PIN_GENERATED, "").toString()
+        )
+        Log.e(
+            "switch2",
+            Sharepref.getString(requireContext(), Constants.SET_BIOMETRIC, "").toString()
+        )
 
 
-        if(Sharepref.getString(requireContext(),Constants.PIN_GENERATED,"")!!.isNotEmpty())
-            {
-                switch1.isChecked=true
-                switch2.isChecked=false
+        if (Sharepref.getString(requireContext(), Constants.PIN_GENERATED, "")!!.isNotEmpty()) {
+            switch1.isChecked = true
+            switch2.isChecked = false
 
-            }
-        else if(Sharepref.getString(requireContext(),Constants.SET_BIOMETRIC,"")!!.isNotEmpty())
-        {
-            switch2.isChecked=true
-            switch1.isChecked=false
+        } else if (Sharepref.getString(requireContext(), Constants.SET_BIOMETRIC, "")!!
+                .isNotEmpty()
+        ) {
+            switch2.isChecked = true
+            switch1.isChecked = false
         }
     }
+
     private fun switchChecker() {
         switch1.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked)
-            {
-                Log.e("switch1",Sharepref.getString(requireContext(), Constants.PIN_GENERATED,"").toString())
-                if(Sharepref.getString(requireContext(), Constants.PIN_GENERATED,"")!!.isEmpty())
-                {
+            if (isChecked) {
+                Log.e(
+                    "switch1",
+                    Sharepref.getString(requireContext(), Constants.PIN_GENERATED, "").toString()
+                )
+                if (Sharepref.getString(requireContext(), Constants.PIN_GENERATED, "")!!
+                        .isEmpty()
+                ) {
 
-                    Sharepref.setString(requireContext(),Constants.SET_BIOMETRIC,"")
-                    findNavController().navigate(R.id.action_biometricFragment_to_pinGenerationFragment)
+                    Sharepref.setString(requireContext(), Constants.SET_BIOMETRIC, "")
+
                 }
 
-                switch2.isChecked=false
-            }
-            else
-            {
-                Sharepref.setString(requireContext(), Constants.PIN_GENERATED,"")
+                switch2.isChecked = false
+            } else {
+                Sharepref.setString(requireContext(), Constants.PIN_GENERATED, "")
 
             }
         }
         switch2.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked)
-            {
-                Log.e("switch2",Sharepref.getString(requireContext(), Constants.SET_BIOMETRIC,"").toString())
+            if (isChecked) {
+                Log.e(
+                    "switch2",
+                    Sharepref.getString(requireContext(), Constants.SET_BIOMETRIC, "").toString()
+                )
 
-                switch1.isChecked=false
-                Sharepref.setString(requireContext(),Constants.SET_BIOMETRIC,"1")
-                Sharepref.setString(requireContext(), Constants.PIN_GENERATED,"")
+                switch1.isChecked = false
+                Sharepref.setString(requireContext(), Constants.SET_BIOMETRIC, "1")
+                Sharepref.setString(requireContext(), Constants.PIN_GENERATED, "")
 
 
-                if(biometricNotSet){
+                if (biometricNotSet) {
 
-                    switch2.isChecked=false
+                    switch2.isChecked = false
                     val builder = AlertDialog.Builder(requireContext())
 
                     with(builder)
                     {
                         setTitle("Alert!!")
-                        setMessage( getString(R.string.error_no_device_credentials))
+                        setMessage(getString(R.string.error_no_device_credentials))
                         setIcon(R.drawable.ic_lock)
-                        setPositiveButton("ok") { _,_ ->
+                        setPositiveButton("ok") { _, _ ->
 
                         }
                         show()
                     }
-                }
-                else{
+                } else {
                     authenticateWithBiometrics()
                 }
 
 
-            }
-            else
-            {
-                Sharepref.setString(requireContext(),Constants.SET_BIOMETRIC,"")
+            } else {
+                Sharepref.setString(requireContext(), Constants.SET_BIOMETRIC, "")
 
             }
         }
     }
+
     private fun checkDeviceCanAuthenticateWithBiometrics() {
         val biometricManager = BiometricManager.from(requireContext())
         when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL)) {
@@ -194,45 +214,76 @@ class BiometricFragment : Fragment() {
 
             }
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
-                Toast.makeText(requireContext(), getString(R.string.message_no_support_biometrics), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.message_no_support_biometrics),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
-                Toast.makeText(requireContext(), getString(R.string.message_no_hardware_available), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.message_no_hardware_available),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
                 checkAPILevelAndProceed()
             }
             BiometricManager.BIOMETRIC_ERROR_SECURITY_UPDATE_REQUIRED -> {
-                Toast.makeText(requireContext(), getString(R.string.error_security_update_required), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_security_update_required),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             BiometricManager.BIOMETRIC_ERROR_UNSUPPORTED -> {
-                Toast.makeText(requireContext(), getString(R.string.error_unknown), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_unknown),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             BiometricManager.BIOMETRIC_STATUS_UNKNOWN -> {
-                Toast.makeText(requireContext(), getString(R.string.error_unknown), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_unknown),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }
+
     private fun inAuth() {
         executor = ContextCompat.getMainExecutor(requireContext())
         callBack = object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                Toast.makeText(requireContext(), getString(R.string.error_unknown), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_unknown),
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
-                Toast.makeText(requireContext(), getString(R.string.message_success), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.message_success),
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
-                Toast.makeText(requireContext(), getErrorMessage(errorCode), Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getErrorMessage(errorCode), Toast.LENGTH_LONG)
+                    .show()
             }
         }
         biometricPrompt = BiometricPrompt(this, executor, callBack)
     }
+
     private fun biometricsEnrollIntent(): Intent {
         return Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
             putExtra(
@@ -241,24 +292,25 @@ class BiometricFragment : Fragment() {
             )
         }
     }
+
     private fun setUpDeviceLockInAPIBelow23Intent(): Intent {
         return Intent(Settings.ACTION_SECURITY_SETTINGS)
     }
+
     private fun checkAPILevelAndProceed() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             startActivityForResult(setUpDeviceLockInAPIBelow23Intent(), RC_DEVICE_CREDENTIAL_ENROLL)
         } else {
-            try{
+            try {
                 startActivityForResult(biometricsEnrollIntent(), RC_BIOMETRICS_ENROLL)
-            }
-            catch (e:Exception)
-            {
-                biometricNotSet=true
-             Log.e("Error:",e.message.toString())
+            } catch (e: Exception) {
+                biometricNotSet = true
+                Log.e("Error:", e.message.toString())
             }
 
         }
     }
+
     private fun getErrorMessage(errorCode: Int): String {
         return when (errorCode) {
             BiometricPrompt.ERROR_NEGATIVE_BUTTON -> {
@@ -300,9 +352,8 @@ class BiometricFragment : Fragment() {
             }
             BiometricPrompt.ERROR_NO_DEVICE_CREDENTIAL -> {
 
-                    startActivityForResult(biometricsEnrollIntent(), RC_BIOMETRICS_ENROLL)
-                    getString(R.string.error_no_device_credentials)
-
+                startActivityForResult(biometricsEnrollIntent(), RC_BIOMETRICS_ENROLL)
+                getString(R.string.error_no_device_credentials)
 
 
             }
@@ -314,6 +365,7 @@ class BiometricFragment : Fragment() {
             }
         }
     }
+
     private fun authenticateWithBiometrics() {
         val promptInfo = BiometricPrompt.PromptInfo.Builder().apply {
             setTitle(getString(R.string.title_biometric_dialog))
@@ -322,16 +374,28 @@ class BiometricFragment : Fragment() {
         }.build()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            keyguardManager = requireActivity().getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+            keyguardManager =
+                requireActivity().getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             keyguardManager?.let { manager ->
                 if (manager.isKeyguardSecure) {
                     biometricPrompt.authenticate(promptInfo)
                 } else {
-                    startActivityForResult(setUpDeviceLockInAPIBelow23Intent(), RC_DEVICE_CREDENTIAL_ENROLL)
+                    startActivityForResult(
+                        setUpDeviceLockInAPIBelow23Intent(),
+                        RC_DEVICE_CREDENTIAL_ENROLL
+                    )
                 }
             }
         } else {
             biometricPrompt.authenticate(promptInfo)
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.set_pin_view -> {
+                findNavController().navigate(R.id.action_biometricFragment_to_pinGenerationFragment)
+            }
         }
     }
 

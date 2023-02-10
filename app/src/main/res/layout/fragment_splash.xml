@@ -11,7 +11,7 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       app:layout_constraintGuide_percent="0.12" />
+       app:layout_constraintGuide_percent="0.0" />
    <androidx.constraintlayout.widget.Guideline
        android:id="@+id/bottom_horizontal_guideline"
        android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
    <ImageView
        android:layout_width="0dp"
        android:layout_height="0dp"
-       android:src="@drawable/backgrond"
+       android:src="@drawable/background_blue_backgound"
        android:scaleType="fitXY"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"

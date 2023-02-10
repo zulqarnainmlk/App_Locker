@@ -21,7 +21,7 @@ internal object Utils {
     @JvmStatic
     fun reverseProcessTime(time: Int): IntArray {
         var time = time
-        Log.e("time1122", "timetotalusage${time}")
+        //Log.e("time1122", "timetotalusage${time}")
 
         val hourMinSec = IntArray(3)
         hourMinSec[0] = time / 3600

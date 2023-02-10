@@ -44,7 +44,6 @@ import kotlinx.android.synthetic.main.fragment_login.google_constraint
 import kotlinx.android.synthetic.main.fragment_login.password
 import kotlinx.android.synthetic.main.fragment_login.signIn_button_login
 import kotlinx.android.synthetic.main.fragment_login.signup_button
-import kotlinx.android.synthetic.main.login.*
 import listeners.HomeListener
 import java.util.*
 

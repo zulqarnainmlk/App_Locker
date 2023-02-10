@@ -53,14 +53,7 @@ class MainActivity : AppCompatActivity(), HomeListener, View.OnClickListener {
     }
 
 
-    override fun onDestroy() {
-        //stopService(mServiceIntent);
-        val broadcastIntent = Intent()
-        broadcastIntent.action = "restartservice"
-        broadcastIntent.setClass(this, Restarter::class.java)
-        this.sendBroadcast(broadcastIntent)
-        super.onDestroy()
-    }
+
 
     override fun onHomeDataChangeListener(
         toolbarVisibility: Boolean,
@@ -103,6 +96,8 @@ class MainActivity : AppCompatActivity(), HomeListener, View.OnClickListener {
             }
         }
     }
+
+
 
 //    private fun openHomeFragment() {
 //        val navHostFragment =

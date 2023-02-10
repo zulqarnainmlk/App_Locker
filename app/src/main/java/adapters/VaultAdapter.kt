@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -47,16 +48,26 @@ class VaultAdapter(
         }
         holder.name.text = AppInfo.name
         holder.package_name.text = AppInfo.pkgInfo
+
         holder.switch.isChecked= true
         holder.switch.setThumbResource(R.drawable.thumb)
 
 
-        holder.itemView.toggle_click.setOnClickListener {
+        holder.toggle_click.setOnClickListener {
 
             if( holder.switch.isChecked){
+                //holder.switch.setThumbResource(R.drawable.thumb)
+                Toast.makeText(context,"switch unlocked",Toast.LENGTH_SHORT).show()
                 adapterListener.adapterVault("unblock", position)
-                holder.switch.setThumbResource(R.drawable.thumb1)
+
             }
+//            else
+//            {
+//                holder.switch.setThumbResource(R.drawable.thumb1)
+//
+//                adapterListener.adapterVault("unblock", position)
+//
+//            }
 
         }
 
@@ -81,5 +92,6 @@ class VaultAdapter(
         val name: TextView = itemView.findViewById(R.id.app_name)
         val package_name: TextView = itemView.findViewById(R.id.package_name)
         var switch: SwitchCompat = itemView.findViewById(R.id.switchButton)
+        var toggle_click: View = itemView.findViewById(R.id.toggle_click)
     }
 }

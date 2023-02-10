@@ -2,13 +2,15 @@ package database
 
 import android.content.Context
 import androidx.room.*
+import database.dao.MonthlyUsageListDao
+import database.dao.TodayUsageListDao
 import database.dao.VaultDao
-import models.AppVault
-import models.DbVault
+import database.dao.WeeklyUsageListDao
+import models.*
 
 
 @Database(
-    entities = [DbVault::class,AppVault::class],
+    entities = [DbVault::class,AppVault::class,ListTodayModel::class,ListWeeklyModel::class,ListMonthlyModel::class],
 
 //    autoMigrations = [
 //        AutoMigration (from = 1, to = 2)
@@ -20,6 +22,9 @@ import models.DbVault
 abstract class VaultDatabase : RoomDatabase() {
 
     abstract fun vaultDao(): VaultDao
+    abstract fun todayUsageListDao(): TodayUsageListDao
+    abstract fun weeklyUsageListDao(): WeeklyUsageListDao
+    abstract fun MonthlyUsageListDao(): MonthlyUsageListDao
 
     companion object {
         @Volatile

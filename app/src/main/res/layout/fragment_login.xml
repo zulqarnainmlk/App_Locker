@@ -38,7 +38,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/backgrond"
+            android:src="@drawable/backgound_lines_for_blue_backgound"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +81,8 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_80sdp"
             android:src="@drawable/lock_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

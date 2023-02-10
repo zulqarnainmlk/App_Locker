@@ -126,13 +126,7 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
     }
 
     private fun listeners() {
-//        tab_apps.setOnClickListener(this)
-//        tab_vault.setOnClickListener(this)
-//        view_back.setOnClickListener(this)
-//        home_tab.setOnClickListener(this)
-//        apps_tab.setOnClickListener(this)
-//        vault_tab.setOnClickListener(this)
-//        profile_tab.setOnClickListener(this)
+
         all_apps.setOnClickListener(this)
         vault.setOnClickListener(this)
 //        switch2.setOnClickListener(this)
@@ -338,32 +332,7 @@ class VaultFragment : Fragment(), View.OnClickListener, AdapterListener {
                 if(Sharepref.getString(requireContext(),Constants.PIN_GENERATED ,"")!!.isEmpty()  && Sharepref.getString(requireContext(),Constants.SET_BIOMETRIC,"")!!.isEmpty()){
 
 
-                    // in case pin code is empty
 
-//                    apps[position].status = !apps[position].status
-//                    displayAppsList[position].status = !displayAppsList[position].status
-//                    Log.e("block_view", "name  :${apps[position].appName}")
-//                    Log.e("block_view", "block status   :${apps[position].status}")
-//                    val AppId = System.currentTimeMillis().toInt()
-//
-//                    val data = DbVault(
-//                        AppId, displayAppsList[position].status, displayAppsList[position].appName,
-//                        displayAppsList[position].packageName, displayAppsList[position].icon.toString()
-//                    )
-//
-//
-//                    vaultAdapter.notifyDataSetChanged()
-//
-//
-//
-//                    lifecycleScope.launch {
-//                        vaultDatabase.addData(data)
-//
-//                    }
-//                    Toast.makeText(requireContext(),"Please Set PIN  or Biometric Authentication",Toast.LENGTH_SHORT).show()
-
-
-                    //
                     val builder = AlertDialog.Builder(requireContext())
 
                     with(builder)

@@ -10,6 +10,7 @@
 
 
 
+
     <EditText
         android:id="@+id/searchField"
         android:imeOptions="actionSearch"

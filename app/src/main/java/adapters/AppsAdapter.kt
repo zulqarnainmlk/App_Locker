@@ -39,6 +39,15 @@ class AppsAdapter(
 
 
         holder.switch.isChecked = mList[position].status
+        if (holder.switch.isChecked)
+        {
+            holder.switch.setThumbResource(R.drawable.thumb)
+        }
+        else
+        {
+            holder.switch.setThumbResource(R.drawable.thumb1)
+
+        }
 
 
 
@@ -48,8 +57,8 @@ class AppsAdapter(
         holder.itemView.toggle_click.setOnClickListener {
             if (holder.switch.isChecked) {
                 holder.switch.isChecked = false
-                adapterListener.adapterData("unblock", position)
                 holder.switch.setThumbResource(R.drawable.thumb1)
+                adapterListener.adapterData("unblock", position)
 
             } else {
                 holder.switch.isChecked = true

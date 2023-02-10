@@ -112,10 +112,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     private fun listeners() {
 
+        constraint_privacy.setOnClickListener(this)
+        constraint_terms.setOnClickListener(this)
         constraint_resetPIN.setOnClickListener(this)
         constraint_changePass.setOnClickListener(this)
         constraint_pin_biometric.setOnClickListener(this)
-        constraint_logout_gmail.setOnClickListener(this)
         constraint_logout.setOnClickListener(this)
         constraint_logout_gmail.setOnClickListener(this)
 
@@ -124,8 +125,16 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(v: View?) {
         when (v!!.id) {
+            R.id.constraint_privacy -> {
+                findNavController().navigate(R.id.action_profileFragment_to_privacyFragment)
+
+            }
             R.id.constraint_pin_biometric -> {
                 findNavController().navigate(R.id.action_profileFragment_to_biometricFragment)
+
+            }
+            R.id.constraint_terms -> {
+                findNavController().navigate(R.id.action_profileFragment_to_termsFragment)
 
             }
 
